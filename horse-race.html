@@ -1,0 +1,1639 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Team Review Horse Race</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #f5f0e6;
+      --cream-2: #ebe2cd;
+      --parchment: #e8dec7;
+      --ink: #2a2520;
+      --ink-soft: #5a4f42;
+      --muted: #8a7e6c;
+      --line: #d4c4a4;
+      --racing-green: #1a4d3a;
+      --racing-green-2: #0f3527;
+      --gold: #c8a85a;
+      --gold-deep: #a08443;
+      --burgundy: #6b1f1f;
+      --turf: #d9cba8;
+      --turf-2: #c9b88c;
+      --rail: #6b4423;
+      --shadow-sm: 0 2px 6px rgba(42, 37, 32, 0.08);
+      --shadow-md: 0 8px 20px rgba(42, 37, 32, 0.12);
+      --shadow-lg: 0 20px 50px rgba(42, 37, 32, 0.18);
+
+      /* horse silks colours - 11 distinct racing colours */
+      --silk-1: #1e3a8a;   /* royal blue */
+      --silk-2: #b91c1c;   /* scarlet */
+      --silk-3: #15803d;   /* emerald */
+      --silk-4: #ca8a04;   /* gold */
+      --silk-5: #6b21a8;   /* plum */
+      --silk-6: #0f766e;   /* teal */
+      --silk-7: #c2410c;   /* burnt orange */
+      --silk-8: #be185d;   /* magenta */
+      --silk-9: #4338ca;   /* indigo */
+      --silk-10: #65a30d;  /* lime */
+      --silk-11: #475569;  /* slate */
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--cream);
+    }
+
+    body {
+      font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+      color: var(--ink);
+      font-weight: 500;
+      line-height: 1.5;
+      background:
+        radial-gradient(ellipse at top, rgba(200, 168, 90, 0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at bottom, rgba(26, 77, 58, 0.06) 0%, transparent 60%),
+        var(--cream);
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* subtle paper grain */
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 1;
+      mix-blend-mode: multiply;
+    }
+
+    .stage {
+      position: relative;
+      z-index: 2;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 28px 24px 40px;
+    }
+
+    /* ============= HEADER ============= */
+    .masthead {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 24px;
+      align-items: end;
+      padding: 8px 4px 24px;
+      border-bottom: 3px double var(--gold);
+      margin-bottom: 24px;
+    }
+
+    .title-block .eyebrow {
+      font-family: "Outfit", sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--gold-deep);
+      margin: 0 0 4px;
+    }
+
+    h1.title {
+      font-family: "Playfair Display", serif;
+      font-weight: 900;
+      font-style: italic;
+      font-size: clamp(2rem, 4.4vw, 3.4rem);
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      color: var(--racing-green-2);
+      margin: 0;
+    }
+
+    h1.title .amp {
+      color: var(--gold-deep);
+      font-style: italic;
+      font-weight: 700;
+    }
+
+    .subtitle {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      margin: 8px 0 0;
+      max-width: 560px;
+      font-weight: 500;
+    }
+
+    .status-stack {
+      display: grid;
+      gap: 8px;
+      justify-items: end;
+    }
+
+    .live-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--racing-green);
+      color: var(--cream);
+      padding: 7px 14px 7px 12px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .live-badge .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 0 rgba(200, 168, 90, 0.6);
+      animation: pulse 2s infinite;
+    }
+
+    .live-badge.is-demo {
+      background: var(--burgundy);
+    }
+
+    .live-badge.is-demo .dot {
+      background: #f5d76e;
+    }
+
+    @keyframes pulse {
+      0% { box-shadow: 0 0 0 0 rgba(200, 168, 90, 0.6); }
+      70% { box-shadow: 0 0 0 8px rgba(200, 168, 90, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(200, 168, 90, 0); }
+    }
+
+    .meta-line {
+      font-size: 0.78rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ============= MAIN LAYOUT ============= */
+    .main-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 24px;
+      align-items: start;
+    }
+
+    @media (max-width: 980px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    .card {
+      background:
+        linear-gradient(180deg, #fdfaf2 0%, var(--cream) 100%);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 4px;
+      border: 1px solid rgba(200, 168, 90, 0.3);
+      border-radius: 3px;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px 14px;
+      border-bottom: 1px solid var(--line);
+      position: relative;
+      z-index: 2;
+    }
+
+    .card-head h2 {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 0.01em;
+      color: var(--racing-green-2);
+      margin: 0;
+    }
+
+    .card-head .ornament {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--gold-deep);
+      letter-spacing: 0.04em;
+    }
+
+    /* ============= RACE TRACK ============= */
+    .track-area {
+      position: relative;
+      z-index: 2;
+      padding: 18px 20px 22px;
+      overflow-x: auto;
+    }
+
+    .track {
+      min-width: 740px;
+      position: relative;
+      background:
+        linear-gradient(180deg, transparent 0%, rgba(105, 67, 35, 0.05) 100%),
+        repeating-linear-gradient(0deg,
+          var(--turf) 0,
+          var(--turf) 56px,
+          var(--turf-2) 56px,
+          var(--turf-2) 112px
+        );
+      border-top: 4px solid var(--rail);
+      border-bottom: 4px solid var(--rail);
+      border-radius: 2px;
+      padding: 0;
+      box-shadow:
+        inset 0 4px 12px rgba(105, 67, 35, 0.12),
+        inset 0 -4px 12px rgba(105, 67, 35, 0.12);
+    }
+
+    /* start gate */
+    .start-rail {
+      position: absolute;
+      left: 178px;
+      top: -4px;
+      bottom: -4px;
+      width: 3px;
+      background: var(--ink);
+      z-index: 4;
+    }
+
+    .start-rail::before {
+      content: "START";
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: var(--ink-soft);
+      white-space: nowrap;
+    }
+
+    /* finish line */
+    .finish-line {
+      position: absolute;
+      right: 80px;
+      top: -4px;
+      bottom: -4px;
+      width: 30px;
+      z-index: 4;
+      background-color: #fff;
+      background-image:
+        linear-gradient(45deg, var(--ink) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--ink) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--ink) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--ink) 75%);
+      background-size: 14px 14px;
+      background-position: 0 0, 0 7px, 7px -7px, -7px 0;
+      box-shadow: 0 0 0 2px var(--ink);
+    }
+
+    .finish-line::before {
+      content: "FINISH";
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.62rem;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      color: var(--ink-soft);
+      white-space: nowrap;
+    }
+
+    /* a single lane (one horse) */
+    .lane {
+      position: relative;
+      display: grid;
+      grid-template-columns: 36px 130px minmax(0, 1fr) 76px;
+      align-items: center;
+      height: 56px;
+      border-bottom: 1px dashed rgba(105, 67, 35, 0.25);
+    }
+
+    .lane:last-child { border-bottom: none; }
+
+    .lane-no {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-weight: 700;
+      font-size: 1.15rem;
+      text-align: center;
+      color: var(--ink-soft);
+      letter-spacing: -0.02em;
+    }
+
+    .lane-name {
+      font-weight: 700;
+      font-size: 0.94rem;
+      padding-right: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+
+    .runway {
+      position: relative;
+      height: 100%;
+    }
+
+    /* dust trail behind the horse */
+    .trail {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: var(--progress, 0%);
+      height: 6px;
+      border-radius: 999px;
+      background: linear-gradient(90deg,
+        rgba(105, 67, 35, 0) 0%,
+        rgba(105, 67, 35, 0.18) 60%,
+        rgba(105, 67, 35, 0.32) 100%
+      );
+      transition: width 1.4s cubic-bezier(0.34, 1.06, 0.64, 1);
+    }
+
+    .horse-marker {
+      position: absolute;
+      left: var(--progress, 0%);
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 54px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      transition: left 1.4s cubic-bezier(0.34, 1.06, 0.64, 1);
+      z-index: 5;
+    }
+
+    .horse-bubble {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      border: 2.5px solid var(--silk, var(--racing-green));
+      box-shadow:
+        0 8px 16px rgba(42, 37, 32, 0.18),
+        inset 0 -3px 6px rgba(42, 37, 32, 0.06);
+      animation: gallop 0.9s ease-in-out infinite alternate;
+    }
+
+    @keyframes gallop {
+      0% { transform: translateY(0) rotate(-1.5deg); }
+      100% { transform: translateY(-3px) rotate(1.5deg); }
+    }
+
+    .horse-emoji {
+      font-size: 28px;
+      line-height: 1;
+      filter: drop-shadow(0 1px 1px rgba(42, 37, 32, 0.2));
+    }
+
+    /* silk colour bar on left of bubble */
+    .silk-band {
+      position: absolute;
+      left: -2.5px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 26px;
+      background: var(--silk, var(--racing-green));
+      border-radius: 3px 0 0 3px;
+    }
+
+    /* rank badge above horse */
+    .rank-badge {
+      position: absolute;
+      top: -6px;
+      right: -8px;
+      width: 22px;
+      height: 22px;
+      display: grid;
+      place-items: center;
+      background: var(--ink);
+      color: var(--cream);
+      border-radius: 50%;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: 0.72rem;
+      border: 2px solid #fff;
+      box-shadow: 0 2px 4px rgba(42, 37, 32, 0.25);
+    }
+
+    .rank-badge.leader {
+      background: var(--gold);
+      color: var(--ink);
+    }
+
+    .rank-badge.second {
+      background: #c0c0c0;
+      color: var(--ink);
+    }
+
+    .rank-badge.third {
+      background: #cd7f32;
+      color: var(--cream);
+    }
+
+    /* crown for leader */
+    .crown {
+      position: absolute;
+      top: -22px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 18px;
+      filter: drop-shadow(0 2px 3px rgba(200, 168, 90, 0.5));
+      animation: crownBob 2.2s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes crownBob {
+      0%, 100% { transform: translateX(-50%) translateY(0) rotate(-3deg); }
+      50% { transform: translateX(-50%) translateY(-3px) rotate(3deg); }
+    }
+
+    /* winner glow when target crossed */
+    .horse-marker.winner .horse-bubble {
+      box-shadow:
+        0 0 0 4px rgba(200, 168, 90, 0.3),
+        0 0 24px rgba(200, 168, 90, 0.6),
+        0 8px 16px rgba(42, 37, 32, 0.2);
+    }
+
+    .score-pill {
+      justify-self: center;
+      background: #fff;
+      border: 1.5px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 11px;
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      font-size: 0.88rem;
+      min-width: 64px;
+      text-align: center;
+      color: var(--ink);
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .score-pill.bump {
+      transform: scale(1.12);
+      border-color: var(--gold);
+    }
+
+    .score-pill .divider {
+      color: var(--muted);
+      font-weight: 500;
+      margin: 0 1px;
+    }
+
+    .score-pill .denom {
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    /* ============= LEADERBOARD ============= */
+    .leaderboard {
+      position: relative;
+      z-index: 2;
+      padding: 14px 18px 18px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .leader-row {
+      display: grid;
+      grid-template-columns: 28px 1fr auto;
+      gap: 10px;
+      align-items: center;
+      padding: 9px 12px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-size: 0.88rem;
+      transition: transform 0.4s ease, background 0.4s ease;
+    }
+
+    .leader-row.is-leader {
+      background: linear-gradient(90deg, rgba(200, 168, 90, 0.18), #fff 60%);
+      border-color: var(--gold);
+    }
+
+    .position {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--gold-deep);
+      font-size: 1rem;
+    }
+
+    .leader-name {
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: var(--ink);
+    }
+
+    .leader-name::before {
+      content: "";
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: var(--silk-colour, var(--ink));
+      border-radius: 2px;
+      margin-right: 8px;
+      vertical-align: middle;
+      transform: translateY(-1px);
+    }
+
+    .leader-score {
+      font-family: "Playfair Display", serif;
+      font-weight: 700;
+      color: var(--racing-green-2);
+    }
+
+    /* ============= CONTROLS / ADMIN ============= */
+    .controls-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .btn {
+      appearance: none;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      padding: 7px 14px;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn.primary {
+      background: var(--racing-green);
+      color: var(--cream);
+      border-color: var(--racing-green);
+    }
+
+    .btn.primary:hover {
+      background: var(--racing-green-2);
+    }
+
+    .btn.gold {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold-deep);
+    }
+
+    .btn.gold:hover { background: var(--gold-deep); color: var(--cream); }
+
+    /* ============= EDITABLE TABLE (local/admin) ============= */
+    .admin-panel {
+      margin-top: 24px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .notice {
+      margin: 14px 18px;
+      padding: 12px 14px;
+      background: #fff8e6;
+      color: #6d4b08;
+      border: 1px solid rgba(109, 75, 8, 0.2);
+      border-radius: 4px;
+      font-size: 0.86rem;
+    }
+
+    .notice.error {
+      background: #fef2f2;
+      color: #8f1d14;
+      border-color: rgba(180, 35, 24, 0.2);
+    }
+
+    .notice.info {
+      background: #f0f7f2;
+      color: #1e5439;
+      border-color: rgba(31, 122, 92, 0.2);
+    }
+
+    .settings-bar {
+      display: grid;
+      grid-template-columns: minmax(160px, 1fr) minmax(160px, 1fr) auto;
+      gap: 12px;
+      padding: 14px 18px 4px;
+      align-items: end;
+    }
+
+    .settings-bar label {
+      display: grid;
+      gap: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .settings-bar input {
+      font: inherit;
+      font-weight: 600;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .table-wrap {
+      padding: 12px 18px 18px;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      font-size: 0.9rem;
+    }
+
+    thead th {
+      text-align: left;
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      padding: 10px 8px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    tbody td {
+      padding: 8px;
+      border-bottom: 1px solid rgba(212, 196, 164, 0.4);
+      vertical-align: middle;
+    }
+
+    tbody tr:last-child td { border-bottom: none; }
+
+    .lane-cell {
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      font-weight: 700;
+      color: var(--ink-soft);
+      width: 50px;
+      text-align: center;
+    }
+
+    .silk-cell {
+      width: 32px;
+    }
+
+    .silk-swatch {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      background: var(--silk-colour, var(--ink));
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+    }
+
+    tbody input[type="text"],
+    tbody input[type="number"] {
+      width: 100%;
+      font: inherit;
+      font-weight: 600;
+      padding: 7px 10px;
+      border: 1px solid var(--line);
+      border-radius: 3px;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    tbody input[type="number"] {
+      max-width: 100px;
+      text-align: center;
+      font-family: "Playfair Display", serif;
+    }
+
+    .quick-cell {
+      width: 130px;
+      text-align: right;
+    }
+
+    .quick-btn-group {
+      display: inline-flex;
+      gap: 5px;
+    }
+
+    .quick-btn-group .btn {
+      min-width: 42px;
+      padding: 6px 10px;
+    }
+
+    .footer-note {
+      padding: 0 18px 18px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      line-height: 1.5;
+      position: relative;
+      z-index: 2;
+    }
+
+    .ornament-divider {
+      text-align: center;
+      font-family: "Playfair Display", serif;
+      font-style: italic;
+      color: var(--gold-deep);
+      font-size: 1.1rem;
+      letter-spacing: 0.5em;
+      padding: 6px 0 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* hide admin panel when hideTable=true */
+    .admin-panel[hidden] { display: none; }
+
+    /* confetti container */
+    .confetti {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .confetti-piece {
+      position: absolute;
+      width: 8px;
+      height: 14px;
+      top: -20px;
+      animation: confettiFall linear forwards;
+    }
+
+    @keyframes confettiFall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .masthead {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
+      .status-stack { justify-items: start; }
+      .settings-bar { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <main class="stage">
+    <!-- ====== HEADER ====== -->
+    <header class="masthead">
+      <div class="title-block">
+        <p class="eyebrow">The Annual Stakes</p>
+        <h1 class="title" id="title">Team Review <span class="amp">&amp;</span> Horse Race</h1>
+        <p class="subtitle">Eleven runners. Eleven teams. Every review nudges your horse closer to the finish line. The leader wears the crown.</p>
+      </div>
+      <div class="status-stack">
+        <div class="live-badge is-demo" id="liveBadge">
+          <span class="dot"></span>
+          <span id="liveBadgeText">Demo data</span>
+        </div>
+        <div class="meta-line" id="metaLine">Loading…</div>
+      </div>
+    </header>
+
+    <!-- ====== MAIN GRID ====== -->
+    <div class="main-grid">
+
+      <!-- ====== RACE TRACK ====== -->
+      <section class="card">
+        <div class="card-head">
+          <h2>The Course</h2>
+          <span class="ornament">— furlong by furlong —</span>
+        </div>
+        <div class="track-area">
+          <div class="track" id="raceTrack" role="img" aria-label="Race track">
+            <div class="start-rail" aria-hidden="true"></div>
+            <div class="finish-line" aria-hidden="true"></div>
+            <!-- lanes injected here -->
+          </div>
+        </div>
+      </section>
+
+      <!-- ====== LEADERBOARD ====== -->
+      <aside class="card">
+        <div class="card-head">
+          <h2>Form Guide</h2>
+          <span class="ornament">— current standings —</span>
+        </div>
+        <div class="leaderboard" id="leaderboard"></div>
+      </aside>
+    </div>
+
+    <div class="ornament-divider" aria-hidden="true">❦ ❦ ❦</div>
+
+    <!-- ====== ADMIN / BACKEND PANEL ====== -->
+    <section class="card admin-panel" id="adminPanel">
+      <div class="card-head">
+        <h2>The Paddock <span class="ornament" style="margin-left:8px;">— runner setup &amp; scoring —</span></h2>
+        <div class="controls-row">
+          <button type="button" class="btn" id="refreshBtn">↻ Refresh</button>
+          <button type="button" class="btn" id="sampleBtn">Load sample scores</button>
+          <button type="button" class="btn" id="resetBtn">Reset</button>
+          <button type="button" class="btn primary" id="exportBtn">Export CSV</button>
+        </div>
+      </div>
+
+      <div id="notice" class="notice info" hidden></div>
+
+      <div class="settings-bar">
+        <label>Race title
+          <input type="text" id="titleInput" />
+        </label>
+        <label>Finish-line target (reviews)
+          <input type="number" min="1" step="1" id="targetInput" />
+        </label>
+        <button type="button" class="btn gold" id="applySettingsBtn">Apply</button>
+      </div>
+
+      <div class="table-wrap">
+        <table aria-label="Runner setup">
+          <thead>
+            <tr>
+              <th class="lane-cell">Lane</th>
+              <th class="silk-cell">Silk</th>
+              <th>Team / runner name</th>
+              <th style="width:140px;">Reviews</th>
+              <th class="quick-cell">Quick update</th>
+            </tr>
+          </thead>
+          <tbody id="adminRows"></tbody>
+        </table>
+      </div>
+
+      <div class="footer-note" id="footerNote">
+        Local mode saves to this browser only. To connect this to a live data source, embed the file with
+        <code>?csvUrl=...</code> (Google Sheets) or <code>?spList=Horse%20Race%20Reviews</code> (SharePoint List) on the URL — see the README.
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // ============= CONFIG =============
+    const DEFAULT_TITLE = 'Team Review & Horse Race';
+    const TEAM_COUNT = 11;
+    const STORAGE_KEY = 'horseRaceWidget.v2';
+    const SILK_VARS = Array.from({length: 11}, (_, i) => `var(--silk-${i+1})`);
+
+    // raw colours for confetti / leaderboard swatches
+    const SILK_HEX = [
+      '#1e3a8a', '#b91c1c', '#15803d', '#ca8a04', '#6b21a8',
+      '#0f766e', '#c2410c', '#be185d', '#4338ca', '#65a30d', '#475569'
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+
+    const config = {
+      title:               params.get('title'),
+      csvUrl:              params.get('csvUrl') || params.get('csv') || '',
+      scriptUrl:           params.get('scriptUrl') || '',
+      scriptToken:         params.get('token') || '',
+      sharePointListName:  params.get('spList') || '',
+      sharePointSiteUrl:   params.get('siteUrl') || deriveSharePointSiteUrl(),
+      titleField:          params.get('titleField') || 'Title',
+      reviewField:         params.get('field')      || 'Reviews',
+      orderField:          params.get('orderField') || 'TeamOrder',
+      targetField:         params.get('targetField')|| 'RaceTarget',
+      refreshSeconds:      positiveNumber(params.get('refresh'), 30),
+      targetReviews:       positiveNumber(params.get('target'),  null),
+      hideTable:           /^true$/i.test(params.get('hideTable') || ''),
+      teamsParam:          params.get('teams')
+    };
+
+    const csvMode        = Boolean(config.csvUrl);
+    const scriptMode     = Boolean(config.scriptUrl);
+    const sharePointMode = !csvMode && !scriptMode && Boolean(config.sharePointListName);
+    const liveMode       = csvMode || sharePointMode || scriptMode;
+    // adminWritable: admin panel buttons can write back to the source of truth
+    const adminWritable  = scriptMode || !liveMode;
+
+    // ============= ELEMENTS =============
+    const els = {
+      title:        document.getElementById('title'),
+      titleInput:   document.getElementById('titleInput'),
+      targetInput:  document.getElementById('targetInput'),
+      raceTrack:    document.getElementById('raceTrack'),
+      leaderboard:  document.getElementById('leaderboard'),
+      adminPanel:   document.getElementById('adminPanel'),
+      adminRows:    document.getElementById('adminRows'),
+      liveBadge:    document.getElementById('liveBadge'),
+      liveBadgeText:document.getElementById('liveBadgeText'),
+      metaLine:     document.getElementById('metaLine'),
+      notice:       document.getElementById('notice'),
+      footerNote:   document.getElementById('footerNote'),
+      confetti:     document.getElementById('confetti'),
+      refreshBtn:   document.getElementById('refreshBtn'),
+      sampleBtn:    document.getElementById('sampleBtn'),
+      resetBtn:     document.getElementById('resetBtn'),
+      exportBtn:    document.getElementById('exportBtn'),
+      applyBtn:     document.getElementById('applySettingsBtn')
+    };
+
+    // ============= STATE =============
+    let state = loadLocalState();
+    let previousReviews = state.teams.map(t => t.reviews);
+    let previousWinners = new Set();
+
+    init();
+
+    // ============= INIT =============
+    function init() {
+      // Apply optional teams= URL param
+      if (config.teamsParam) {
+        const names = config.teamsParam.split('|').map(s => s.trim()).filter(Boolean).slice(0, TEAM_COUNT);
+        names.forEach((name, i) => { if (state.teams[i]) state.teams[i].name = name; });
+        saveLocalState();
+      }
+
+      state.title         = config.title || state.title || DEFAULT_TITLE;
+      state.targetReviews = config.targetReviews || state.targetReviews || 25;
+
+      els.title.textContent = state.title;
+      els.titleInput.value  = state.title;
+      els.targetInput.value = state.targetReviews;
+
+      // wire buttons
+      els.refreshBtn.addEventListener('click', refreshData);
+      els.sampleBtn .addEventListener('click', loadSampleScores);
+      els.resetBtn  .addEventListener('click', resetLocalTable);
+      els.exportBtn .addEventListener('click', exportCsv);
+      els.applyBtn  .addEventListener('click', applySettings);
+
+      if (config.hideTable) {
+        els.adminPanel.hidden = true;
+      }
+
+      if (csvMode || scriptMode) {
+        setCsvUi();
+        refreshData();
+        window.setInterval(refreshData, config.refreshSeconds * 1000);
+      } else if (sharePointMode) {
+        setSharePointUi();
+        refreshData();
+        window.setInterval(refreshData, config.refreshSeconds * 1000);
+      } else {
+        setLocalUi();
+        renderAll();
+      }
+    }
+
+    // ============= DATA LOADERS =============
+
+    function defaultTeams() {
+      return Array.from({length: TEAM_COUNT}, (_, i) => ({
+        lane:    i + 1,
+        name:    `Team ${i + 1}`,
+        reviews: 0,
+        id:      null
+      }));
+    }
+
+    function loadLocalState() {
+      try {
+        const raw = window.localStorage.getItem(STORAGE_KEY);
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (Array.isArray(parsed.teams) && parsed.teams.length) {
+            parsed.teams = normaliseTeams(parsed.teams);
+            return Object.assign({title: DEFAULT_TITLE, targetReviews: 25}, parsed);
+          }
+        }
+      } catch (e) { /* ignore */ }
+      return {title: DEFAULT_TITLE, targetReviews: 25, teams: defaultTeams()};
+    }
+
+    function saveLocalState() {
+      if (liveMode) return;
+      try { window.localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function normaliseTeams(teams) {
+      const out = defaultTeams();
+      teams.slice(0, TEAM_COUNT).forEach((t, i) => {
+        out[i] = {
+          lane:    Number(t.lane    || i + 1),
+          name:    String(t.name    || t.Title || `Team ${i+1}`).trim() || `Team ${i+1}`,
+          reviews: Math.max(0, Number(t.reviews || t.Reviews || 0) || 0),
+          id:      t.id || t.Id || null
+        };
+      });
+      return out;
+    }
+
+    async function refreshData() {
+      if (csvMode) { await loadFromCsv(); return; }
+      if (scriptMode) { await loadFromScript(); return; }
+      if (sharePointMode) { await loadFromSharePoint(); return; }
+      renderAll();
+    }
+
+    // Calls the Apps Script web app via GET. Returns the parsed JSON, or throws on error.
+    async function callScript(actionParams) {
+      if (!config.scriptUrl) throw new Error('No scriptUrl configured');
+      const u = new URL(config.scriptUrl);
+      Object.keys(actionParams).forEach(k => {
+        if (actionParams[k] != null) u.searchParams.set(k, actionParams[k]);
+      });
+      if (config.scriptToken) u.searchParams.set('token', config.scriptToken);
+      u.searchParams.set('_', Date.now());
+
+      const res = await fetch(u.toString(), {
+        method: 'GET',
+        redirect: 'follow',
+        cache: 'no-store'
+      });
+      if (!res.ok) throw new Error('Script HTTP ' + res.status);
+      const body = await res.json();
+      if (!body.ok) throw new Error(body.error || 'Script returned ok=false');
+      return body;
+    }
+
+    async function loadFromScript() {
+      setNotice('Loading from Google Sheet (via script)…', 'info');
+      try {
+        const body = await callScript({action: 'list'});
+        ingestScriptRows(body.data);
+        clearNotice();
+        els.metaLine.textContent = 'Last refreshed: ' + nowString();
+        renderAll();
+      } catch (err) {
+        setNotice('Could not load from Apps Script. Check the scriptUrl, that the deployment is set to "Anyone" access, and that you redeployed after edits. Details: ' + err.message, 'error');
+        els.metaLine.textContent = 'Script load failed';
+        renderAll();
+      }
+    }
+
+    function ingestScriptRows(rows) {
+      if (!Array.isArray(rows) || !rows.length) {
+        throw new Error('Script returned no team rows');
+      }
+      // Take RaceTarget from first row if no URL override
+      if (!config.targetReviews) {
+        const fromScript = Number(rows[0].target);
+        if (Number.isFinite(fromScript) && fromScript > 0) state.targetReviews = fromScript;
+      }
+      state.teams = rows.slice(0, TEAM_COUNT).map((item, i) => ({
+        lane:    Number(item.lane || i + 1),
+        id:      null,
+        name:    String(item.title || `Team ${i+1}`),
+        reviews: Math.max(0, Number(item.reviews || 0) || 0)
+      })).sort((a, b) => a.lane - b.lane);
+    }
+
+    async function loadFromCsv() {
+      // Cache-bust so the browser doesn't serve a stale CSV
+      const sep = config.csvUrl.includes('?') ? '&' : '?';
+      const url = config.csvUrl + sep + '_=' + Date.now();
+
+      setNotice('Loading from Google Sheets…', 'info');
+      try {
+        const res = await fetch(url, {cache: 'no-store'});
+        if (!res.ok) throw new Error('Fetch failed: ' + res.status + ' ' + res.statusText);
+        const text = await res.text();
+        const rows = parseCsv(text);
+        if (rows.length < 2) throw new Error('CSV has no data rows. Add team rows under the header row.');
+
+        const headers = rows[0].map(h => String(h || '').trim());
+        const records = rows.slice(1).map(row => {
+          const obj = {};
+          headers.forEach((h, i) => obj[h] = row[i] != null ? String(row[i]).trim() : '');
+          return obj;
+        }).filter(r => r[config.titleField]);
+
+        if (!records.length) throw new Error('No team rows found. Check the ' + config.titleField + ' column is populated.');
+
+        // Pick up RaceTarget from the first row if no URL override
+        if (!config.targetReviews) {
+          const fromCsv = Number(records[0][config.targetField]);
+          if (Number.isFinite(fromCsv) && fromCsv > 0) state.targetReviews = fromCsv;
+        }
+
+        state.teams = records.slice(0, TEAM_COUNT).map((item, i) => ({
+          lane:    Number(item[config.orderField]  || i + 1),
+          id:      null,
+          name:    String(item[config.titleField] || `Team ${i+1}`),
+          reviews: Math.max(0, Number(item[config.reviewField] || 0) || 0)
+        })).sort((a, b) => a.lane - b.lane);
+
+        clearNotice();
+        els.metaLine.textContent = 'Last refreshed: ' + nowString();
+        renderAll();
+      } catch (err) {
+        setNotice('Could not load Google Sheets data. Check the CSV URL and that the sheet is shared as "Anyone with the link can view" (or published). Details: ' + err.message, 'error');
+        els.metaLine.textContent = 'Sheet load failed';
+        renderAll();
+      }
+    }
+
+    // Small, robust CSV parser. Handles quoted fields, escaped quotes, CRLF/LF.
+    function parseCsv(text) {
+      const rows = [];
+      let row = [];
+      let field = '';
+      let inQuotes = false;
+      let i = 0;
+      // Strip BOM
+      if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+      while (i < text.length) {
+        const ch = text[i];
+        if (inQuotes) {
+          if (ch === '"') {
+            if (text[i+1] === '"') { field += '"'; i += 2; continue; }
+            inQuotes = false; i++; continue;
+          }
+          field += ch; i++; continue;
+        }
+        if (ch === '"') { inQuotes = true; i++; continue; }
+        if (ch === ',') { row.push(field); field = ''; i++; continue; }
+        if (ch === '\r') { i++; continue; }
+        if (ch === '\n') { row.push(field); rows.push(row); row = []; field = ''; i++; continue; }
+        field += ch; i++;
+      }
+      if (field !== '' || row.length) { row.push(field); rows.push(row); }
+      // Drop fully-empty rows
+      return rows.filter(r => r.some(c => c !== ''));
+    }
+
+    async function loadFromSharePoint() {
+      const selects = ['Id', 'Title', config.reviewField, config.orderField, config.targetField]
+        .map(encodeURIComponent).join(',');
+      const url =
+        config.sharePointSiteUrl.replace(/\/$/, '') +
+        "/_api/web/lists/getbytitle('" + escapeOData(config.sharePointListName) + "')/items" +
+        '?$select=' + selects +
+        '&$orderby=' + encodeURIComponent(config.orderField + ' asc');
+
+      setNotice('Loading from SharePoint List: ' + config.sharePointListName, 'info');
+      try {
+        const res = await fetch(url, {
+          headers: {'Accept': 'application/json;odata=nometadata'},
+          credentials: 'same-origin'
+        });
+        if (!res.ok) throw new Error('SharePoint returned ' + res.status + ' ' + res.statusText);
+        const data = await res.json();
+        const rows = Array.isArray(data.value) ? data.value :
+                     (data.d && data.d.results ? data.d.results : []);
+        if (!rows.length) throw new Error('The list loaded, but no rows were returned. Add ' + TEAM_COUNT + ' rows.');
+
+        // pick up a target value from the list if rows have one and no URL param
+        if (!config.targetReviews) {
+          const fromList = Number(rows[0][config.targetField]);
+          if (Number.isFinite(fromList) && fromList > 0) state.targetReviews = fromList;
+        }
+
+        state.teams = rows.slice(0, TEAM_COUNT).map((item, i) => ({
+          lane:    Number(item[config.orderField]  || i + 1),
+          id:      item.Id,
+          name:    String(item.Title || `Team ${i+1}`),
+          reviews: Math.max(0, Number(item[config.reviewField] || 0) || 0)
+        })).sort((a, b) => a.lane - b.lane);
+
+        clearNotice();
+        els.metaLine.textContent = 'Last refreshed: ' + nowString();
+        renderAll();
+      } catch (err) {
+        setNotice('Could not load SharePoint data. Check list name, column names, permissions, and that this page is hosted in the same site. Details: ' + err.message, 'error');
+        els.metaLine.textContent = 'SharePoint load failed';
+        renderAll();
+      }
+    }
+
+    // ============= RENDER =============
+
+    function renderAll() {
+      state.teams = normaliseTeams(state.teams);
+      renderTrack();
+      renderLeaderboard();
+      renderAdminTable();
+      if (!liveMode) {
+        els.metaLine.textContent = 'Updated locally: ' + nowString();
+      }
+    }
+
+    function rankedTeams() {
+      return state.teams
+        .map((t, i) => Object.assign({}, t, {originalIndex: i}))
+        .sort((a, b) => b.reviews - a.reviews || a.lane - b.lane);
+    }
+
+    function computePosition(reviews, leaderReviews, target) {
+      // Hybrid: relative to leader, but pegged to finish line once target is reached.
+      // - Leader sits at ~92% (just before the finish line) until they hit target.
+      // - When leader hits target, leader pins to 100% and others scale to target.
+      const TRACK_FRONT = 92;   // leader's parked position before crossing
+      if (leaderReviews <= 0) return 0;
+      if (leaderReviews >= target) {
+        // absolute mode against target; leader at 100, others proportional to target
+        return Math.min(100, (reviews / target) * 100);
+      }
+      // relative mode: leader at TRACK_FRONT, others scaled
+      return (reviews / leaderReviews) * TRACK_FRONT;
+    }
+
+    function renderTrack() {
+      // remove old lanes
+      Array.from(els.raceTrack.querySelectorAll('.lane')).forEach(n => n.remove());
+
+      const ranking = rankedTeams();
+      const rankMap = new Map(ranking.map((t, i) => [t.originalIndex, i + 1]));
+
+      const leaderReviews = ranking.length ? ranking[0].reviews : 0;
+      const target = state.targetReviews;
+
+      state.teams.forEach((team, index) => {
+        const rank = rankMap.get(index);
+        const pct = computePosition(team.reviews, leaderReviews, target);
+        const hasWon = target > 0 && team.reviews >= target;
+
+        const lane = document.createElement('div');
+        lane.className = 'lane';
+        lane.style.setProperty('--progress', pct + '%');
+        lane.style.setProperty('--silk', SILK_VARS[index % SILK_VARS.length]);
+
+        const rankClass = rank === 1 ? 'leader' : (rank === 2 ? 'second' : (rank === 3 ? 'third' : ''));
+        const crownHtml = (rank === 1 && leaderReviews > 0) ? '<div class="crown" aria-hidden="true">👑</div>' : '';
+
+        lane.innerHTML =
+          '<div class="lane-no">' + team.lane + '</div>' +
+          '<div class="lane-name" title="' + escapeHtml(team.name) + '">' + escapeHtml(team.name) + '</div>' +
+          '<div class="runway">' +
+            '<div class="trail" aria-hidden="true"></div>' +
+            '<div class="horse-marker ' + (hasWon ? 'winner' : '') + '" ' +
+                 'aria-label="' + escapeHtml(team.name) + ': ' + team.reviews + ' reviews, currently ' + rank + (rank === 1 ? 'st' : rank === 2 ? 'nd' : rank === 3 ? 'rd' : 'th') + '">' +
+              crownHtml +
+              '<div class="horse-bubble">' +
+                '<div class="silk-band"></div>' +
+                '<span class="horse-emoji" aria-hidden="true">🐎</span>' +
+              '</div>' +
+              '<div class="rank-badge ' + rankClass + '">' + rank + '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="score-pill" data-index="' + index + '">' +
+            '<span class="num">' + team.reviews + '</span>' +
+            '<span class="divider"> / </span>' +
+            '<span class="denom">' + target + '</span>' +
+          '</div>';
+
+        els.raceTrack.appendChild(lane);
+
+        // detect bump (score increased) and animate score pill + maybe confetti
+        const prev = previousReviews[index];
+        if (prev != null && team.reviews > prev) {
+          const pill = lane.querySelector('.score-pill');
+          pill.classList.add('bump');
+          window.setTimeout(() => pill.classList.remove('bump'), 400);
+        }
+
+        // confetti when newly crossing target
+        const wasWinner = previousWinners.has(index);
+        if (hasWon && !wasWinner) {
+          fireConfetti(SILK_HEX[index % SILK_HEX.length]);
+        }
+      });
+
+      previousReviews = state.teams.map(t => t.reviews);
+      previousWinners = new Set(state.teams
+        .map((t, i) => target > 0 && t.reviews >= target ? i : -1)
+        .filter(i => i >= 0));
+    }
+
+    function renderLeaderboard() {
+      els.leaderboard.innerHTML = '';
+      const ranking = rankedTeams();
+      ranking.forEach((team, i) => {
+        const row = document.createElement('div');
+        row.className = 'leader-row' + (i === 0 && team.reviews > 0 ? ' is-leader' : '');
+        row.style.setProperty('--silk-colour', SILK_HEX[team.originalIndex % SILK_HEX.length]);
+        row.innerHTML =
+          '<div class="position">' + ordinal(i + 1) + '</div>' +
+          '<div class="leader-name" title="' + escapeHtml(team.name) + '">' + escapeHtml(team.name) + '</div>' +
+          '<div class="leader-score">' + team.reviews + '</div>';
+        els.leaderboard.appendChild(row);
+      });
+    }
+
+    function renderAdminTable() {
+      els.adminRows.innerHTML = '';
+      const disabled = adminWritable ? '' : 'disabled';
+      state.teams.forEach((team, index) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td class="lane-cell">' + team.lane + '</td>' +
+          '<td class="silk-cell"><div class="silk-swatch" style="--silk-colour:' + SILK_HEX[index] + '"></div></td>' +
+          '<td><input type="text" value="' + escapeAttr(team.name) + '" data-index="' + index + '" data-field="name" ' + (scriptMode ? 'disabled title="Edit team names in the sheet directly"' : disabled) + '></td>' +
+          '<td><input type="number" min="0" step="1" value="' + team.reviews + '" data-index="' + index + '" data-field="reviews" ' + disabled + '></td>' +
+          '<td class="quick-cell"><span class="quick-btn-group">' +
+            '<button type="button" class="btn" data-index="' + index + '" data-action="minus" ' + disabled + '>−1</button>' +
+            '<button type="button" class="btn primary" data-index="' + index + '" data-action="plus" ' + disabled + '>+1</button>' +
+            '<button type="button" class="btn gold" data-index="' + index + '" data-action="plus5" ' + disabled + '>+5</button>' +
+            '<button type="button" class="btn" data-index="' + index + '" data-action="reset" ' + disabled + ' title="Reset to zero">↺</button>' +
+          '</span></td>';
+        els.adminRows.appendChild(tr);
+      });
+
+      els.adminRows.querySelectorAll('input').forEach(inp => inp.addEventListener('change', onTableInput));
+      els.adminRows.querySelectorAll('button[data-action]').forEach(btn => btn.addEventListener('click', onQuickUpdate));
+    }
+
+    // ============= EVENTS =============
+
+    async function onTableInput(e) {
+      const inp = e.currentTarget;
+      const i = Number(inp.dataset.index);
+      const field = inp.dataset.field;
+      if (!state.teams[i]) return;
+
+      if (scriptMode) {
+        if (field !== 'reviews') return; // name edits not supported in script mode
+        const value = Math.max(0, Math.floor(Number(inp.value || 0)));
+        if (value === state.teams[i].reviews) return;
+        const lane = state.teams[i].lane;
+        await dispatchScriptAction({action: 'set', lane: lane, value: value}, i);
+        return;
+      }
+
+      if (field === 'reviews') {
+        state.teams[i].reviews = Math.max(0, Math.floor(Number(inp.value || 0)));
+      } else {
+        state.teams[i].name = inp.value.trim() || `Team ${i+1}`;
+      }
+      saveLocalState();
+      renderTrack();
+      renderLeaderboard();
+    }
+
+    async function onQuickUpdate(e) {
+      const btn = e.currentTarget;
+      const i = Number(btn.dataset.index);
+      const action = btn.dataset.action;
+      if (!state.teams[i]) return;
+
+      const ACTION_MAP = {
+        plus:  {action: 'increment'},
+        minus: {action: 'decrement'},
+        plus5: {action: 'add', delta: 5},
+        reset: {action: 'reset'}
+      };
+      const scriptAction = ACTION_MAP[action];
+
+      if (scriptMode) {
+        if (!scriptAction) return;
+        await dispatchScriptAction(
+          Object.assign({lane: state.teams[i].lane}, scriptAction),
+          i, btn
+        );
+        return;
+      }
+
+      // Local / demo mode: mutate state directly
+      const current = state.teams[i].reviews;
+      if (action === 'plus')       state.teams[i].reviews = current + 1;
+      else if (action === 'minus') state.teams[i].reviews = Math.max(0, current - 1);
+      else if (action === 'plus5') state.teams[i].reviews = current + 5;
+      else if (action === 'reset') state.teams[i].reviews = 0;
+      saveLocalState();
+      renderAll();
+    }
+
+    async function dispatchScriptAction(actionParams, teamIndex, sourceBtn) {
+      const previous = sourceBtn ? sourceBtn.disabled : null;
+      if (sourceBtn) { sourceBtn.disabled = true; sourceBtn.style.opacity = '0.6'; }
+      try {
+        const body = await callScript(actionParams);
+        if (body.data) {
+          ingestScriptRows(body.data);
+          renderAll();
+        }
+        clearNotice();
+      } catch (err) {
+        setNotice('Update failed: ' + err.message + '. The sheet may not have changed.', 'error');
+        // Pull fresh state so the UI doesn't drift
+        await loadFromScript();
+      } finally {
+        if (sourceBtn) { sourceBtn.disabled = previous; sourceBtn.style.opacity = ''; }
+      }
+    }
+
+    function applySettings() {
+      state.title         = els.titleInput.value.trim() || DEFAULT_TITLE;
+      state.targetReviews = Math.max(1, Math.floor(Number(els.targetInput.value || 25)));
+      els.title.textContent = state.title;
+      saveLocalState();
+      renderAll();
+    }
+
+    function loadSampleScores() {
+      if (liveMode) return;
+      const sample = [12, 18, 9, 6, 14, 21, 4, 17, 10, 3, 15];
+      state.teams.forEach((t, i) => t.reviews = sample[i] || 0);
+      saveLocalState();
+      renderAll();
+    }
+
+    function resetLocalTable() {
+      if (liveMode) return;
+      if (!window.confirm('Reset all reviews to zero and restore default team names?')) return;
+      state = {title: DEFAULT_TITLE, targetReviews: 25, teams: defaultTeams()};
+      els.title.textContent = state.title;
+      els.titleInput.value  = state.title;
+      els.targetInput.value = state.targetReviews;
+      saveLocalState();
+      renderAll();
+    }
+
+    function exportCsv() {
+      const rows = [['Title','Reviews','TeamOrder','RaceTarget']]
+        .concat(state.teams.map(t => [t.name, t.reviews, t.lane, state.targetReviews]));
+      const csv = rows.map(r => r.map(csvCell).join(',')).join('\n');
+      const blob = new Blob([csv], {type: 'text/csv;charset=utf-8'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'horse-race-list.csv';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    }
+
+    // ============= UI MODES =============
+
+    function setSharePointUi() {
+      els.liveBadge.classList.remove('is-demo');
+      els.liveBadgeText.textContent = 'Live: ' + config.sharePointListName;
+      els.sampleBtn.disabled = true;
+      els.resetBtn.disabled  = true;
+      els.exportBtn.disabled = true;
+      els.footerNote.innerHTML =
+        'Live SharePoint mode. To move the horses, edit the <strong>Reviews</strong> number in the ' +
+        '<em>' + escapeHtml(config.sharePointListName) + '</em> list. ' +
+        'This widget refreshes every ' + config.refreshSeconds + ' seconds.';
+    }
+
+    function setCsvUi() {
+      els.liveBadge.classList.remove('is-demo');
+      els.liveBadgeText.textContent = 'Live: Google Sheets';
+      els.sampleBtn.disabled = true;
+      els.resetBtn.disabled  = true;
+      els.exportBtn.disabled = true;
+      if (scriptMode) {
+        els.footerNote.innerHTML =
+          'Live Google Sheets mode (with scoring buttons). Use the +1 / +5 / −1 / ↺ buttons above to score. ' +
+          'Every click writes to your Google Sheet via Apps Script. ' +
+          'The widget also auto-refreshes every ' + config.refreshSeconds + ' seconds.';
+      } else {
+        els.footerNote.innerHTML =
+          'Live Google Sheets mode (read-only). To move the horses, edit the <strong>Reviews</strong> number in your Google Sheet. ' +
+          'This widget refreshes every ' + config.refreshSeconds + ' seconds. ' +
+          'Want buttons? Add the Apps Script web app and pass <code>&amp;scriptUrl=…</code> on the URL — see the README.';
+      }
+    }
+
+    function setLocalUi() {
+      els.liveBadge.classList.add('is-demo');
+      els.liveBadgeText.textContent = 'Demo data';
+    }
+
+    function setNotice(msg, kind) {
+      els.notice.hidden = false;
+      els.notice.textContent = msg;
+      els.notice.className = 'notice ' + (kind || 'info');
+    }
+
+    function clearNotice() {
+      els.notice.hidden = true;
+      els.notice.textContent = '';
+    }
+
+    // ============= CONFETTI =============
+
+    function fireConfetti(primaryColour) {
+      const palette = [primaryColour, '#c8a85a', '#1a4d3a', '#ffffff', '#6b1f1f'];
+      const count = 60;
+      for (let i = 0; i < count; i++) {
+        const piece = document.createElement('div');
+        piece.className = 'confetti-piece';
+        piece.style.left = Math.random() * 100 + 'vw';
+        piece.style.backgroundColor = palette[Math.floor(Math.random() * palette.length)];
+        piece.style.animationDuration = (2.5 + Math.random() * 2) + 's';
+        piece.style.animationDelay = (Math.random() * 0.3) + 's';
+        piece.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+        els.confetti.appendChild(piece);
+        window.setTimeout(() => piece.remove(), 5000);
+      }
+    }
+
+    // ============= HELPERS =============
+
+    function ordinal(n) {
+      const s = ['th', 'st', 'nd', 'rd'];
+      const v = n % 100;
+      return n + (s[(v - 20) % 10] || s[v] || s[0]);
+    }
+
+    function positiveNumber(value, fallback) {
+      const n = Number(value);
+      return Number.isFinite(n) && n > 0 ? n : fallback;
+    }
+
+    function nowString() {
+      return new Date().toLocaleString();
+    }
+
+    function deriveSharePointSiteUrl() {
+      const origin = window.location.origin;
+      const path = window.location.pathname;
+      const lower = path.toLowerCase();
+      const markers = ['/siteassets/', '/shared documents/', '/documents/'];
+      for (const marker of markers) {
+        const idx = lower.indexOf(marker);
+        if (idx > -1) return origin + path.slice(0, idx);
+      }
+      const m = path.match(/^(\/sites\/[^/]+|\/teams\/[^/]+)/i);
+      if (m) return origin + m[1];
+      return origin;
+    }
+
+    function escapeOData(value) { return String(value).replace(/'/g, "''"); }
+
+    function csvCell(v) {
+      const t = String(v == null ? '' : v);
+      return /[",\n]/.test(t) ? '"' + t.replace(/"/g, '""') + '"' : t;
+    }
+
+    function escapeHtml(v) {
+      return String(v == null ? '' : v)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+    }
+
+    function escapeAttr(v) { return escapeHtml(v).replace(/`/g, '&#096;'); }
+  }());
+  </script>
+</body>
+</html>
