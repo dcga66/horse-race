@@ -372,7 +372,7 @@
     .track-surface {
       position: absolute;
       left: 248px;        /* starts at end of gate column (60 + 188) */
-      right: 96px;        /* ends before score column */
+      right: 120px;        /* ends before score column */
       top: 28px;
       bottom: 4px;
       background:
@@ -437,7 +437,7 @@
     /* Finish line — proper checkered */
     .finish-line {
       position: absolute;
-      right: 96px;
+      right: 120px;
       top: 28px;
       bottom: 4px;
       width: 14px;
@@ -472,7 +472,7 @@
     .lane {
       position: relative;
       display: grid;
-      grid-template-columns: 60px 188px minmax(0, 1fr) 96px;
+      grid-template-columns: 60px 188px minmax(0, 1fr) 120px;
       align-items: stretch;
       height: 72px;
       z-index: 2;
@@ -501,7 +501,7 @@
       content: "";
       position: absolute;
       left: 248px;
-      right: 96px;
+      right: 120px;
       bottom: 0;
       height: 1.5px;
       background: var(--rail);
@@ -711,27 +711,46 @@
       color: #fff;
       border: 1.5px solid var(--gate-2);
       border-radius: var(--r-md);
-      padding: 8px 12px;
+      padding: 10px 16px;
       font-family: var(--font-mono);
       font-weight: 600;
-      font-size: 0.82rem;
-      min-width: 76px;
+      min-width: 100px;
       text-align: center;
-      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.08);
+      box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255,255,255,0.10);
       font-variant-numeric: tabular-nums;
       transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+      display: inline-flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 4px;
+      line-height: 1;
     }
 
     .score-pill.bump {
-      transform: scale(1.12);
+      transform: scale(1.10);
       background: var(--gold-deep);
       border-color: var(--gold);
-      box-shadow: 0 0 0 4px rgba(212, 168, 42, 0.2), var(--shadow-md);
+      box-shadow: 0 0 0 5px rgba(212, 168, 42, 0.25), var(--shadow-lg);
     }
 
-    .score-pill .num { color: var(--gold-light); font-weight: 700; }
-    .score-pill .divider { color: rgba(255,255,255,0.4); margin: 0 2px; font-weight: 400; }
-    .score-pill .denom { color: rgba(255,255,255,0.55); font-weight: 500; }
+    .score-pill .num {
+      color: var(--gold-light);
+      font-weight: 700;
+      font-size: 1.55rem;
+      letter-spacing: -0.02em;
+      font-variation-settings: "tnum" 1;
+    }
+    .score-pill .divider { display: none; }
+    .score-pill .denom {
+      color: rgba(255, 255, 255, 0.55);
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.02em;
+    }
+    .score-pill .denom::before {
+      content: "/ ";
+      color: rgba(255, 255, 255, 0.35);
+    }
 
     /* =================== LEADERBOARD =================== */
     .leaderboard {
@@ -1597,7 +1616,6 @@
                 HORSE_SVG +
                 '<span class="horse-emoji" aria-hidden="true">🐎</span>' +
               '</div>' +
-              '<div class="rank-badge ' + rankClass + '">' + team.reviews + '</div>' +
             '</div>' +
           '</div>' +
           '<div class="score-pill" data-index="' + index + '">' +
