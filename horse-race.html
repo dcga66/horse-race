@@ -1,79 +1,112 @@
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Team Review Horse Race</title>
+  <title>The Customer Review Grand National</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,900;1,700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Fraunces:ital,opsz,wght,SOFT@0,9..144,400..900,0..100;1,9..144,400..900,0..100&family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --cream: #f5f0e6;
-      --cream-2: #ebe2cd;
-      --parchment: #e8dec7;
-      --ink: #2a2520;
-      --ink-soft: #5a4f42;
-      --muted: #8a7e6c;
-      --line: #d4c4a4;
-      --racing-green: #1a4d3a;
-      --racing-green-2: #0f3527;
-      --gold: #c8a85a;
-      --gold-deep: #a08443;
-      --burgundy: #6b1f1f;
-      --turf: #d9cba8;
-      --turf-2: #c9b88c;
-      --rail: #6b4423;
-      --shadow-sm: 0 2px 6px rgba(42, 37, 32, 0.08);
-      --shadow-md: 0 8px 20px rgba(42, 37, 32, 0.12);
-      --shadow-lg: 0 20px 50px rgba(42, 37, 32, 0.18);
+      /* ===== Neutrals ===== */
+      --bg:           #f7f5ef;
+      --bg-2:         #efece4;
+      --surface:      #ffffff;
+      --surface-2:    #faf8f3;
+      --border:       #e7e3d8;
+      --border-strong:#cfc9b9;
+      --ink:          #161513;
+      --ink-2:        #2a2823;
+      --muted:        #6b6557;
+      --muted-2:      #8d8674;
 
-      /* horse silks colours - 11 distinct racing colours */
-      --silk-1: #1e3a8a;   /* royal blue */
-      --silk-2: #b91c1c;   /* scarlet */
-      --silk-3: #15803d;   /* emerald */
-      --silk-4: #ca8a04;   /* gold */
-      --silk-5: #6b21a8;   /* plum */
-      --silk-6: #0f766e;   /* teal */
-      --silk-7: #c2410c;   /* burnt orange */
-      --silk-8: #be185d;   /* magenta */
-      --silk-9: #4338ca;   /* indigo */
-      --silk-10: #65a30d;  /* lime */
-      --silk-11: #475569;  /* slate */
+      /* ===== Racing accents ===== */
+      --turf:         #2a8a5a;   /* mid green */
+      --turf-deep:    #1d6f47;   /* shadow green */
+      --turf-light:   #3aa06d;   /* highlight green */
+      --turf-rim:     #14492f;   /* very dark outer rail */
+      --gate:         #0f0e0c;   /* near-black gate post */
+      --gate-2:       #1c1a17;
+      --rail:         #f5f3ec;   /* off-white rail */
+      --gold:         #d4a82a;
+      --gold-light:   #f1ce5a;
+      --gold-deep:    #a17e15;
+      --silver:       #c9c9d0;
+      --bronze:       #b87333;
+      --crimson:      #a82929;
+
+      /* ===== Shadows ===== */
+      --shadow-xs: 0 1px 2px rgba(20, 14, 0, 0.04);
+      --shadow-sm: 0 2px 4px rgba(20, 14, 0, 0.06), 0 1px 2px rgba(20, 14, 0, 0.04);
+      --shadow-md: 0 6px 16px rgba(20, 14, 0, 0.08), 0 2px 4px rgba(20, 14, 0, 0.04);
+      --shadow-lg: 0 18px 40px rgba(20, 14, 0, 0.10), 0 4px 12px rgba(20, 14, 0, 0.06);
+      --shadow-xl: 0 28px 60px rgba(20, 14, 0, 0.14), 0 8px 18px rgba(20, 14, 0, 0.08);
+      --shadow-bubble: 0 6px 14px rgba(0, 0, 0, 0.35), 0 2px 4px rgba(0, 0, 0, 0.25);
+
+      /* ===== Radii ===== */
+      --r-sm: 6px;
+      --r-md: 10px;
+      --r-lg: 14px;
+      --r-xl: 18px;
+      --r-pill: 999px;
+
+      /* ===== Silk palette ===== */
+      --silk-1:  #4338ca;   /* indigo  */
+      --silk-2:  #dc2626;   /* red     */
+      --silk-3:  #047857;   /* emerald */
+      --silk-4:  #ea580c;   /* orange  */
+      --silk-5:  #7c3aed;   /* purple  */
+      --silk-6:  #0891b2;   /* cyan    */
+      --silk-7:  #ca8a04;   /* gold    */
+      --silk-8:  #db2777;   /* pink    */
+      --silk-9:  #1d4ed8;   /* blue    */
+      --silk-10: #65a30d;   /* lime    */
+      --silk-11: #475569;   /* slate   */
+
+      /* ===== Fonts ===== */
+      --font-sans:    "Geist", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", sans-serif;
+      --font-mono:    "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+      --font-display: "Fraunces", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+      --font-banner:  "Anton", "Oswald", "Impact", "Arial Narrow Bold", sans-serif;
     }
 
-    * { box-sizing: border-box; }
+    *, *::before, *::after { box-sizing: border-box; }
 
     html, body {
       margin: 0;
       padding: 0;
-      background: var(--cream);
+      background: var(--bg);
     }
 
     body {
-      font-family: "Outfit", -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: var(--font-sans);
       color: var(--ink);
-      font-weight: 500;
-      line-height: 1.5;
-      background:
-        radial-gradient(ellipse at top, rgba(200, 168, 90, 0.08) 0%, transparent 60%),
-        radial-gradient(ellipse at bottom, rgba(26, 77, 58, 0.06) 0%, transparent 60%),
-        var(--cream);
+      font-weight: 400;
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-feature-settings: "ss01", "cv11";
       min-height: 100vh;
+      background:
+        radial-gradient(1100px 600px at 10% -10%, rgba(212, 168, 42, 0.10), transparent 60%),
+        radial-gradient(900px 500px at 110% 10%, rgba(42, 138, 90, 0.10), transparent 60%),
+        var(--bg);
       position: relative;
     }
 
-    /* subtle paper grain */
+    /* very subtle paper grain */
     body::before {
       content: "";
       position: fixed;
       inset: 0;
       background-image:
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.5'/%3E%3C/svg%3E");
-      opacity: 0.04;
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      mix-blend-mode: multiply;
       pointer-events: none;
       z-index: 1;
-      mix-blend-mode: multiply;
     }
 
     .stage {
@@ -81,73 +114,144 @@
       z-index: 2;
       max-width: 1280px;
       margin: 0 auto;
-      padding: 28px 24px 40px;
+      padding: 56px 32px 80px;
     }
 
-    /* ============= HEADER ============= */
+    @media (max-width: 700px) {
+      .stage { padding: 32px 18px 56px; }
+    }
+
+    /* =================== HEADER =================== */
     .masthead {
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 24px;
+      gap: 32px;
       align-items: end;
-      padding: 8px 4px 24px;
-      border-bottom: 3px double var(--gold);
-      margin-bottom: 24px;
+      padding-bottom: 40px;
+      margin-bottom: 32px;
+      position: relative;
     }
 
-    .title-block .eyebrow {
-      font-family: "Outfit", sans-serif;
+    .masthead::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        var(--border-strong) 8%,
+        var(--border-strong) 92%,
+        transparent 100%);
+    }
+
+    .title-block { min-width: 0; }
+
+    .eyebrow {
       font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.32em;
+      font-weight: 500;
+      letter-spacing: 0.26em;
       text-transform: uppercase;
       color: var(--gold-deep);
-      margin: 0 0 4px;
+      margin: 0 0 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .eyebrow::before,
+    .eyebrow::after {
+      content: "";
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+      display: inline-block;
     }
 
     h1.title {
-      font-family: "Playfair Display", serif;
-      font-weight: 900;
-      font-style: italic;
-      font-size: clamp(2rem, 4.4vw, 3.4rem);
-      line-height: 0.95;
-      letter-spacing: -0.02em;
-      color: var(--racing-green-2);
       margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      line-height: 1;
     }
 
-    h1.title .amp {
-      color: var(--gold-deep);
+    h1.title .t-banner {
+      font-family: var(--font-banner);
+      font-weight: 400;
+      font-size: clamp(3.4rem, 8vw, 6.4rem);
+      letter-spacing: 0.005em;
+      line-height: 0.86;
+      text-transform: uppercase;
+      color: var(--ink);
+      -webkit-text-stroke: 0;
+      display: block;
+    }
+
+    h1.title .t-script {
+      font-family: var(--font-display);
+      font-variation-settings: "opsz" 144, "SOFT" 80;
       font-style: italic;
-      font-weight: 700;
+      font-weight: 500;
+      font-size: clamp(1.7rem, 3.8vw, 2.9rem);
+      letter-spacing: -0.015em;
+      line-height: 1;
+      margin-top: 6px;
+      margin-left: 0.25em;
+      color: var(--muted);
+    }
+
+    h1.title .t-amp {
+      color: var(--gold);
+      font-style: italic;
+      font-weight: 400;
+      font-variation-settings: "opsz" 144, "SOFT" 100;
+      padding: 0 0.05em;
+      font-size: 1.18em;
+      vertical-align: -0.05em;
+    }
+
+    /* Fallback for titles with no "&" — just use the script style */
+    h1.title .t-plain {
+      font-family: var(--font-banner);
+      font-weight: 400;
+      font-size: clamp(3.2rem, 7vw, 5.6rem);
+      letter-spacing: 0.005em;
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: var(--ink);
     }
 
     .subtitle {
-      font-size: 0.95rem;
-      color: var(--ink-soft);
-      margin: 8px 0 0;
-      max-width: 560px;
-      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--muted);
+      margin: 20px 0 0;
+      max-width: 540px;
+      font-weight: 400;
+      line-height: 1.55;
     }
 
     .status-stack {
       display: grid;
-      gap: 8px;
+      gap: 10px;
       justify-items: end;
+      align-content: end;
+      padding-bottom: 4px;
     }
 
     .live-badge {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      background: var(--racing-green);
-      color: var(--cream);
-      padding: 7px 14px 7px 12px;
-      border-radius: 999px;
-      font-size: 0.74rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      gap: 9px;
+      background: var(--surface);
+      color: var(--turf-deep);
+      padding: 7px 13px 7px 11px;
+      border-radius: var(--r-pill);
+      font-size: 0.76rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-sm);
     }
 
@@ -155,36 +259,44 @@
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--gold);
-      box-shadow: 0 0 0 0 rgba(200, 168, 90, 0.6);
+      background: var(--turf);
+      box-shadow: 0 0 0 0 rgba(42, 138, 90, 0.55);
       animation: pulse 2s infinite;
     }
 
     .live-badge.is-demo {
-      background: var(--burgundy);
+      color: #6b500c;
     }
-
     .live-badge.is-demo .dot {
-      background: #f5d76e;
+      background: var(--gold);
+      box-shadow: 0 0 0 0 rgba(212, 168, 42, 0.55);
+      animation: pulse-warn 2s infinite;
     }
 
     @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(200, 168, 90, 0.6); }
-      70% { box-shadow: 0 0 0 8px rgba(200, 168, 90, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(200, 168, 90, 0); }
+      0%   { box-shadow: 0 0 0 0 rgba(42, 138, 90, 0.5); }
+      70%  { box-shadow: 0 0 0 8px rgba(42, 138, 90, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(42, 138, 90, 0); }
+    }
+    @keyframes pulse-warn {
+      0%   { box-shadow: 0 0 0 0 rgba(212, 168, 42, 0.55); }
+      70%  { box-shadow: 0 0 0 8px rgba(212, 168, 42, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(212, 168, 42, 0); }
     }
 
     .meta-line {
       font-size: 0.78rem;
       color: var(--muted);
-      font-weight: 500;
+      font-weight: 400;
+      font-variant-numeric: tabular-nums;
+      font-family: var(--font-mono);
     }
 
-    /* ============= MAIN LAYOUT ============= */
+    /* =================== LAYOUT =================== */
     .main-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1fr) 280px;
-      gap: 24px;
+      grid-template-columns: minmax(0, 1fr) 330px;
+      gap: 22px;
       align-items: start;
     }
 
@@ -193,121 +305,154 @@
     }
 
     .card {
-      background:
-        linear-gradient(180deg, #fdfaf2 0%, var(--cream) 100%);
-      border: 1px solid var(--line);
-      border-radius: 6px;
-      box-shadow: var(--shadow-md);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-xl);
+      box-shadow: var(--shadow-lg);
       overflow: hidden;
       position: relative;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 4px;
-      border: 1px solid rgba(200, 168, 90, 0.3);
-      border-radius: 3px;
-      pointer-events: none;
-      z-index: 1;
     }
 
     .card-head {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 22px 14px;
-      border-bottom: 1px solid var(--line);
-      position: relative;
-      z-index: 2;
+      gap: 16px;
+      padding: 24px 28px 20px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
     }
 
     .card-head h2 {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: 1.15rem;
-      letter-spacing: 0.01em;
-      color: var(--racing-green-2);
+      font-family: var(--font-display);
+      font-variation-settings: "opsz" 60, "SOFT" 40;
+      font-weight: 600;
+      font-style: normal;
+      font-size: 1.35rem;
+      letter-spacing: -0.015em;
+      color: var(--ink);
       margin: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
 
-    .card-head .ornament {
-      font-family: "Playfair Display", serif;
-      font-style: italic;
-      font-size: 0.85rem;
-      color: var(--gold-deep);
-      letter-spacing: 0.04em;
+    .card-head h2::before {
+      content: "";
+      width: 22px;
+      height: 2px;
+      background: var(--gold);
+      display: inline-block;
     }
 
-    /* ============= RACE TRACK ============= */
+    .card-head .head-meta {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-family: var(--font-mono);
+    }
+
+    /* =================== RACE TRACK =================== */
     .track-area {
-      position: relative;
-      z-index: 2;
-      padding: 18px 20px 22px;
+      padding: 28px;
       overflow-x: auto;
+      background:
+        linear-gradient(180deg, var(--surface) 0%, var(--surface-2) 100%);
     }
 
     .track {
-      min-width: 740px;
+      min-width: 820px;
       position: relative;
-      background:
-        linear-gradient(180deg, transparent 0%, rgba(105, 67, 35, 0.05) 100%),
-        repeating-linear-gradient(0deg,
-          var(--turf) 0,
-          var(--turf) 56px,
-          var(--turf-2) 56px,
-          var(--turf-2) 112px
-        );
-      border-top: 4px solid var(--rail);
-      border-bottom: 4px solid var(--rail);
-      border-radius: 2px;
-      padding: 0;
-      box-shadow:
-        inset 0 4px 12px rgba(105, 67, 35, 0.12),
-        inset 0 -4px 12px rgba(105, 67, 35, 0.12);
+      padding-top: 30px;
+      padding-bottom: 8px;
     }
 
-    /* start gate */
+    /* The actual green racing surface (sits behind the lanes) */
+    .track-surface {
+      position: absolute;
+      left: 248px;        /* starts at end of gate column (60 + 188) */
+      right: 96px;        /* ends before score column */
+      top: 28px;
+      bottom: 4px;
+      background:
+        repeating-linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.04) 0,
+          rgba(255, 255, 255, 0.04) 60px,
+          rgba(0, 0, 0, 0.04) 60px,
+          rgba(0, 0, 0, 0.04) 120px
+        ),
+        linear-gradient(180deg, var(--turf-light) 0%, var(--turf) 40%, var(--turf-deep) 100%);
+      border-radius: 6px;
+      box-shadow:
+        inset 0 0 0 3px var(--rail),
+        inset 0 0 0 5px var(--turf-rim),
+        inset 0 2px 12px rgba(0, 0, 0, 0.25),
+        0 1px 0 var(--rail);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Start gate column visual backdrop */
+    .track-gate-col {
+      position: absolute;
+      left: 0;
+      width: 248px;
+      top: 28px;
+      bottom: 4px;
+      background: linear-gradient(180deg, var(--gate-2) 0%, var(--gate) 100%);
+      border-radius: 6px 0 0 6px;
+      box-shadow: var(--shadow-md), inset -1px 0 0 rgba(255,255,255,0.06);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    /* Start label */
     .start-rail {
       position: absolute;
-      left: 178px;
-      top: -4px;
-      bottom: -4px;
-      width: 3px;
-      background: var(--ink);
-      z-index: 4;
+      left: 248px;
+      top: 28px;
+      bottom: 4px;
+      width: 2px;
+      background: transparent;
+      box-shadow: none;
+      z-index: 5;
     }
 
     .start-rail::before {
       content: "START";
       position: absolute;
       top: -22px;
-      left: 50%;
+      left: 0;
       transform: translateX(-50%);
       font-size: 0.62rem;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      color: var(--ink-soft);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--ink);
       white-space: nowrap;
+      font-family: var(--font-mono);
     }
 
-    /* finish line */
+    /* Finish line — proper checkered */
     .finish-line {
       position: absolute;
-      right: 80px;
-      top: -4px;
-      bottom: -4px;
-      width: 30px;
-      z-index: 4;
+      right: 96px;
+      top: 28px;
+      bottom: 4px;
+      width: 14px;
+      z-index: 5;
       background-color: #fff;
       background-image:
-        linear-gradient(45deg, var(--ink) 25%, transparent 25%),
-        linear-gradient(-45deg, var(--ink) 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, var(--ink) 75%),
-        linear-gradient(-45deg, transparent 75%, var(--ink) 75%);
+        linear-gradient(45deg, #1a1a1a 25%, transparent 25%),
+        linear-gradient(-45deg, #1a1a1a 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #1a1a1a 75%),
+        linear-gradient(-45deg, transparent 75%, #1a1a1a 75%);
       background-size: 14px 14px;
       background-position: 0 0, 0 7px, 7px -7px, -7px 0;
-      box-shadow: 0 0 0 2px var(--ink);
+      box-shadow: 0 0 0 2px #1a1a1a, 0 4px 12px rgba(0,0,0,0.4);
+      border-radius: 1px;
     }
 
     .finish-line::before {
@@ -317,271 +462,388 @@
       left: 50%;
       transform: translateX(-50%);
       font-size: 0.62rem;
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      color: var(--ink-soft);
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      color: var(--ink);
       white-space: nowrap;
+      font-family: var(--font-mono);
     }
 
-    /* a single lane (one horse) */
+    /* Lane row */
     .lane {
       position: relative;
       display: grid;
-      grid-template-columns: 36px 130px minmax(0, 1fr) 76px;
-      align-items: center;
-      height: 56px;
-      border-bottom: 1px dashed rgba(105, 67, 35, 0.25);
+      grid-template-columns: 60px 188px minmax(0, 1fr) 96px;
+      align-items: stretch;
+      height: 72px;
+      z-index: 2;
+      animation: laneIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) backwards;
     }
 
-    .lane:last-child { border-bottom: none; }
+    @keyframes laneIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
+    .lane:nth-child(2) { animation-delay: 0.02s; }
+    .lane:nth-child(3) { animation-delay: 0.04s; }
+    .lane:nth-child(4) { animation-delay: 0.06s; }
+    .lane:nth-child(5) { animation-delay: 0.08s; }
+    .lane:nth-child(6) { animation-delay: 0.10s; }
+    .lane:nth-child(7) { animation-delay: 0.12s; }
+    .lane:nth-child(8) { animation-delay: 0.14s; }
+    .lane:nth-child(9) { animation-delay: 0.16s; }
+    .lane:nth-child(10){ animation-delay: 0.18s; }
+    .lane:nth-child(11){ animation-delay: 0.20s; }
+    .lane:nth-child(12){ animation-delay: 0.22s; }
+
+    /* white rail between lanes (sits across track surface) */
+    .lane:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 248px;
+      right: 96px;
+      bottom: 0;
+      height: 1.5px;
+      background: var(--rail);
+      box-shadow: 0 1px 0 rgba(0,0,0,0.15);
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    /* Gate post — lane number */
     .lane-no {
-      font-family: "Playfair Display", serif;
-      font-style: italic;
-      font-weight: 700;
-      font-size: 1.15rem;
-      text-align: center;
-      color: var(--ink-soft);
-      letter-spacing: -0.02em;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: rgba(241, 206, 90, 0.85);
+      font-family: var(--font-banner);
+      font-weight: 400;
+      font-size: 1.5rem;
+      letter-spacing: 0.01em;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      position: relative;
+      z-index: 2;
     }
 
+    .lane-no::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 14%;
+      bottom: 14%;
+      width: 1px;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* Team nameplate — dominant element on the row */
     .lane-name {
-      font-weight: 700;
-      font-size: 0.94rem;
-      padding-right: 10px;
+      align-self: stretch;
+      display: flex;
+      align-items: center;
+      padding: 0 14px 0 18px;
+      color: #ffffff;
+      font-family: var(--font-banner);
+      font-weight: 400;
+      font-size: 1.45rem;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      color: var(--ink);
-      letter-spacing: -0.005em;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.55);
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Silk-color stripe before team name */
+    .lane-name::before {
+      content: "";
+      flex: 0 0 5px;
+      align-self: stretch;
+      background: var(--silk, var(--gold));
+      margin: 14px 14px 14px 0;
+      border-radius: 1px;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.3), 0 0 8px color-mix(in srgb, var(--silk, var(--gold)) 50%, transparent);
     }
 
     .runway {
       position: relative;
       height: 100%;
+      z-index: 2;
     }
 
-    /* dust trail behind the horse */
+    /* Trail behind the horse — softer on green */
     .trail {
       position: absolute;
       left: 0;
       top: 50%;
       transform: translateY(-50%);
       width: var(--progress, 0%);
-      height: 6px;
+      height: 4px;
       border-radius: 999px;
       background: linear-gradient(90deg,
-        rgba(105, 67, 35, 0) 0%,
-        rgba(105, 67, 35, 0.18) 60%,
-        rgba(105, 67, 35, 0.32) 100%
+        color-mix(in srgb, var(--silk, #fff) 0%, transparent) 0%,
+        color-mix(in srgb, var(--silk, #fff) 40%, transparent) 50%,
+        color-mix(in srgb, var(--silk, #fff) 90%, transparent) 100%
       );
+      box-shadow: 0 0 8px color-mix(in srgb, var(--silk, #fff) 30%, transparent);
       transition: width 1.4s cubic-bezier(0.34, 1.06, 0.64, 1);
     }
 
+    /* Horse marker — silk-colored chip with strong shadow */
     .horse-marker {
       position: absolute;
       left: var(--progress, 0%);
       top: 50%;
       transform: translate(-50%, -50%);
-      width: 54px;
-      height: 46px;
+      width: 50px;
+      height: 50px;
       display: grid;
       place-items: center;
       transition: left 1.4s cubic-bezier(0.34, 1.06, 0.64, 1);
-      z-index: 5;
+      z-index: 6;
     }
 
     .horse-bubble {
       position: relative;
-      width: 100%;
-      height: 100%;
+      width: 46px;
+      height: 46px;
       display: grid;
       place-items: center;
-      background: #fff;
-      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-      border: 2.5px solid var(--silk, var(--racing-green));
-      box-shadow:
-        0 8px 16px rgba(42, 37, 32, 0.18),
-        inset 0 -3px 6px rgba(42, 37, 32, 0.06);
-      animation: gallop 0.9s ease-in-out infinite alternate;
+      background: #ffffff;
+      border-radius: 50%;
+      border: 3.5px solid var(--silk, var(--ink));
+      box-shadow: var(--shadow-bubble);
+      animation: gallop 0.85s ease-in-out infinite alternate;
+    }
+
+    /* Hidden — replaced by inline <svg class="horse-svg"> injected by JS */
+    .horse-emoji { display: none; }
+    .silk-band { display: none; }
+
+    .horse-svg {
+      width: 26px;
+      height: 26px;
+      fill: #3d2414;            /* dark chestnut brown */
+      pointer-events: none;
+      filter: drop-shadow(0 1px 1.5px rgba(0, 0, 0, 0.35));
     }
 
     @keyframes gallop {
-      0% { transform: translateY(0) rotate(-1.5deg); }
-      100% { transform: translateY(-3px) rotate(1.5deg); }
+      0%   { transform: translateY(0) rotate(-2deg); }
+      100% { transform: translateY(-3px) rotate(2deg); }
     }
 
-    .horse-emoji {
-      font-size: 28px;
-      line-height: 1;
-      filter: drop-shadow(0 1px 1px rgba(42, 37, 32, 0.2));
-    }
-
-    /* silk colour bar on left of bubble */
-    .silk-band {
-      position: absolute;
-      left: -2.5px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 6px;
-      height: 26px;
-      background: var(--silk, var(--racing-green));
-      border-radius: 3px 0 0 3px;
-    }
-
-    /* rank badge above horse */
+    /* Rank badge */
     .rank-badge {
       position: absolute;
-      top: -6px;
-      right: -8px;
-      width: 22px;
-      height: 22px;
+      top: -3px;
+      right: -4px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 5px;
       display: grid;
       place-items: center;
       background: var(--ink);
-      color: var(--cream);
-      border-radius: 50%;
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: 0.72rem;
+      color: #fff;
+      border-radius: 999px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.66rem;
       border: 2px solid #fff;
-      box-shadow: 0 2px 4px rgba(42, 37, 32, 0.25);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      letter-spacing: 0;
     }
 
     .rank-badge.leader {
-      background: var(--gold);
-      color: var(--ink);
+      background: linear-gradient(180deg, var(--gold-light), var(--gold));
+      color: #4a3a00;
     }
-
     .rank-badge.second {
-      background: #c0c0c0;
-      color: var(--ink);
+      background: linear-gradient(180deg, #e5e5ea, var(--silver));
+      color: #2a2823;
     }
-
     .rank-badge.third {
-      background: #cd7f32;
-      color: var(--cream);
+      background: linear-gradient(180deg, #d39555, var(--bronze));
+      color: #fff;
     }
 
-    /* crown for leader */
+    /* Crown — gold SVG with bob animation */
     .crown {
       position: absolute;
-      top: -22px;
+      top: -20px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 18px;
-      filter: drop-shadow(0 2px 3px rgba(200, 168, 90, 0.5));
-      animation: crownBob 2.2s ease-in-out infinite;
+      width: 22px;
+      height: 16px;
+      font-size: 0;
+      color: transparent;
       pointer-events: none;
+      background-image: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 22' fill='%23f1ce5a' stroke='%23a17e15' stroke-width='1.2' stroke-linejoin='round'%3E%3Cpath d='M2 6 L7 17 L25 17 L30 6 L23 10 L18 3 L13 10 Z'/%3E%3Cpath d='M6 19 L26 19' stroke='%23a17e15' stroke-width='1.5' stroke-linecap='round'/%3E%3Ccircle cx='2' cy='6' r='1.5' fill='%23f1ce5a'/%3E%3Ccircle cx='30' cy='6' r='1.5' fill='%23f1ce5a'/%3E%3Ccircle cx='16' cy='3' r='1.5' fill='%23f1ce5a'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      animation: crownBob 2.2s ease-in-out infinite;
+      filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.4));
+      z-index: 7;
     }
 
     @keyframes crownBob {
       0%, 100% { transform: translateX(-50%) translateY(0) rotate(-3deg); }
-      50% { transform: translateX(-50%) translateY(-3px) rotate(3deg); }
+      50%      { transform: translateX(-50%) translateY(-3px) rotate(3deg); }
     }
 
-    /* winner glow when target crossed */
+    /* Winner halo */
     .horse-marker.winner .horse-bubble {
       box-shadow:
-        0 0 0 4px rgba(200, 168, 90, 0.3),
-        0 0 24px rgba(200, 168, 90, 0.6),
-        0 8px 16px rgba(42, 37, 32, 0.2);
+        0 0 0 4px rgba(241, 206, 90, 0.5),
+        0 0 24px rgba(241, 206, 90, 0.7),
+        var(--shadow-bubble);
     }
 
+    /* Score pill — finish-post style */
     .score-pill {
+      align-self: center;
       justify-self: center;
-      background: #fff;
-      border: 1.5px solid var(--line);
-      border-radius: 999px;
-      padding: 5px 11px;
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      font-size: 0.88rem;
-      min-width: 64px;
+      background: var(--gate);
+      color: #fff;
+      border: 1.5px solid var(--gate-2);
+      border-radius: var(--r-md);
+      padding: 8px 12px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      font-size: 0.82rem;
+      min-width: 76px;
       text-align: center;
-      color: var(--ink);
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s ease, border-color 0.3s ease;
+      box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255,255,255,0.08);
+      font-variant-numeric: tabular-nums;
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     }
 
     .score-pill.bump {
       transform: scale(1.12);
+      background: var(--gold-deep);
       border-color: var(--gold);
+      box-shadow: 0 0 0 4px rgba(212, 168, 42, 0.2), var(--shadow-md);
     }
 
-    .score-pill .divider {
-      color: var(--muted);
-      font-weight: 500;
-      margin: 0 1px;
-    }
+    .score-pill .num { color: var(--gold-light); font-weight: 700; }
+    .score-pill .divider { color: rgba(255,255,255,0.4); margin: 0 2px; font-weight: 400; }
+    .score-pill .denom { color: rgba(255,255,255,0.55); font-weight: 500; }
 
-    .score-pill .denom {
-      color: var(--muted);
-      font-weight: 500;
-    }
-
-    /* ============= LEADERBOARD ============= */
+    /* =================== LEADERBOARD =================== */
     .leaderboard {
-      position: relative;
-      z-index: 2;
-      padding: 14px 18px 18px;
+      padding: 18px 20px 22px;
       display: grid;
-      gap: 6px;
+      gap: 8px;
     }
 
     .leader-row {
       display: grid;
-      grid-template-columns: 28px 1fr auto;
-      gap: 10px;
+      grid-template-columns: 54px 1fr auto;
+      gap: 12px;
       align-items: center;
-      padding: 9px 12px;
-      background: #fff;
-      border: 1px solid var(--line);
-      border-radius: 4px;
-      font-size: 0.88rem;
-      transition: transform 0.4s ease, background 0.4s ease;
+      padding: 12px 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--r-md);
+      font-size: 0.92rem;
+      box-shadow: var(--shadow-xs);
+      transition: background 0.3s ease, border-color 0.3s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .leader-row:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--border-strong);
     }
 
     .leader-row.is-leader {
-      background: linear-gradient(90deg, rgba(200, 168, 90, 0.18), #fff 60%);
-      border-color: var(--gold);
+      background:
+        linear-gradient(90deg, rgba(241, 206, 90, 0.22) 0%, rgba(241, 206, 90, 0.04) 60%, transparent 100%),
+        var(--surface);
+      border-color: rgba(212, 168, 42, 0.55);
+      box-shadow: var(--shadow-md), 0 0 0 1px rgba(212, 168, 42, 0.18);
     }
 
     .position {
-      font-family: "Playfair Display", serif;
-      font-style: italic;
-      font-weight: 700;
-      color: var(--gold-deep);
-      font-size: 1rem;
+      font-family: var(--font-banner);
+      font-weight: 400;
+      color: var(--ink-2);
+      font-size: 1.6rem;
+      letter-spacing: 0.01em;
+      line-height: 1;
+      text-align: center;
+      font-feature-settings: "tnum";
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+      gap: 1px;
     }
 
+    .position-suf {
+      font-family: var(--font-mono);
+      font-weight: 500;
+      font-size: 0.55rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transform: translateY(-0.7em);
+    }
+
+    .leader-row:nth-child(1) .position { color: #6b500c; }   /* deep amber, readable on white */
+    .leader-row:nth-child(2) .position { color: #5a5a62; }   /* dark silver */
+    .leader-row:nth-child(3) .position { color: #7a4915; }   /* dark bronze */
+    .leader-row:nth-child(n+4) .position { color: var(--muted); }
+
     .leader-name {
-      font-weight: 700;
+      font-weight: 600;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       color: var(--ink);
+      font-size: 0.95rem;
+      letter-spacing: -0.005em;
     }
 
     .leader-name::before {
       content: "";
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       background: var(--silk-colour, var(--ink));
-      border-radius: 2px;
-      margin-right: 8px;
+      border-radius: 50%;
+      margin-right: 10px;
       vertical-align: middle;
       transform: translateY(-1px);
+      box-shadow:
+        0 0 0 2px var(--surface),
+        0 0 0 3px color-mix(in srgb, var(--silk-colour, var(--ink)) 40%, transparent),
+        0 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .leader-score {
-      font-family: "Playfair Display", serif;
-      font-weight: 700;
-      color: var(--racing-green-2);
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--ink);
+      font-variant-numeric: tabular-nums;
+      font-size: 0.95rem;
+      background: var(--surface-2);
+      padding: 4px 10px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border);
     }
 
-    /* ============= CONTROLS / ADMIN ============= */
+    .leader-row.is-leader .leader-score {
+      background: var(--gold);
+      color: #3a2c00;
+      border-color: var(--gold-deep);
+    }
+
+    /* =================== BUTTONS =================== */
     .controls-row {
       display: flex;
       flex-wrap: wrap;
@@ -591,216 +853,230 @@
 
     .btn {
       appearance: none;
-      border: 1px solid var(--line);
-      background: #fff;
+      border: 1px solid var(--border-strong);
+      background: var(--surface);
       color: var(--ink);
       font-family: inherit;
-      font-size: 0.82rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      padding: 7px 14px;
-      border-radius: 3px;
+      font-size: 0.84rem;
+      font-weight: 500;
+      letter-spacing: -0.005em;
+      padding: 8px 14px;
+      border-radius: var(--r-sm);
       cursor: pointer;
-      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: background 0.15s ease, border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
+      font-variant-numeric: tabular-nums;
+      box-shadow: var(--shadow-xs);
     }
 
     .btn:hover {
-      transform: translateY(-1px);
+      background: var(--surface-2);
+      border-color: var(--ink-2);
       box-shadow: var(--shadow-sm);
     }
 
+    .btn:active { transform: translateY(1px); box-shadow: none; }
+
     .btn:disabled {
-      opacity: 0.4;
+      opacity: 0.45;
       cursor: not-allowed;
-      transform: none;
       box-shadow: none;
+    }
+    .btn:disabled:hover { background: var(--surface); border-color: var(--border-strong); transform: none; }
+
+    .btn svg {
+      width: 14px;
+      height: 14px;
+      stroke-width: 2;
+      flex-shrink: 0;
     }
 
     .btn.primary {
-      background: var(--racing-green);
-      color: var(--cream);
-      border-color: var(--racing-green);
+      background: var(--ink);
+      color: #fff;
+      border-color: var(--ink);
     }
-
-    .btn.primary:hover {
-      background: var(--racing-green-2);
-    }
+    .btn.primary:hover { background: var(--ink-2); border-color: var(--ink-2); }
 
     .btn.gold {
-      background: var(--gold);
-      color: var(--ink);
+      background: linear-gradient(180deg, var(--gold-light), var(--gold));
+      color: #3a2c00;
       border-color: var(--gold-deep);
+      font-weight: 600;
+    }
+    .btn.gold:hover {
+      background: linear-gradient(180deg, var(--gold), var(--gold-deep));
+      color: #fff;
     }
 
-    .btn.gold:hover { background: var(--gold-deep); color: var(--cream); }
-
-    /* ============= EDITABLE TABLE (local/admin) ============= */
-    .admin-panel {
-      margin-top: 24px;
-      position: relative;
-      z-index: 2;
-    }
+    /* =================== ADMIN =================== */
+    .admin-panel { margin-top: 22px; }
+    .admin-panel[hidden] { display: none; }
 
     .notice {
-      margin: 14px 18px;
+      margin: 16px 28px 0;
       padding: 12px 14px;
       background: #fff8e6;
-      color: #6d4b08;
-      border: 1px solid rgba(109, 75, 8, 0.2);
-      border-radius: 4px;
+      color: #5a3f06;
+      border: 1px solid rgba(212, 168, 42, 0.3);
+      border-radius: var(--r-sm);
       font-size: 0.86rem;
+      line-height: 1.5;
     }
-
     .notice.error {
-      background: #fef2f2;
-      color: #8f1d14;
-      border-color: rgba(180, 35, 24, 0.2);
+      background: #fdf0ef;
+      color: var(--crimson);
+      border-color: rgba(168, 41, 41, 0.25);
     }
-
     .notice.info {
-      background: #f0f7f2;
-      color: #1e5439;
-      border-color: rgba(31, 122, 92, 0.2);
+      background: #eef6f0;
+      color: var(--turf-deep);
+      border-color: rgba(29, 111, 71, 0.22);
     }
 
     .settings-bar {
       display: grid;
-      grid-template-columns: minmax(160px, 1fr) minmax(160px, 1fr) auto;
-      gap: 12px;
-      padding: 14px 18px 4px;
+      grid-template-columns: minmax(180px, 1fr) minmax(180px, 1fr) auto;
+      gap: 14px;
+      padding: 20px 28px 6px;
       align-items: end;
     }
 
     .settings-bar label {
       display: grid;
-      gap: 4px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--muted);
+      font-family: var(--font-mono);
     }
 
-    .settings-bar input {
+    .settings-bar input,
+    tbody input[type="text"],
+    tbody input[type="number"] {
       font: inherit;
-      font-weight: 600;
-      padding: 8px 11px;
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      background: #fff;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      padding: 9px 12px;
+      border: 1px solid var(--border-strong);
+      border-radius: var(--r-sm);
+      background: var(--surface);
       color: var(--ink);
+      transition: border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .settings-bar input:focus,
+    tbody input[type="text"]:focus,
+    tbody input[type="number"]:focus {
+      outline: none;
+      border-color: var(--ink);
+      box-shadow: 0 0 0 3px rgba(22, 21, 19, 0.1);
     }
 
     .table-wrap {
-      padding: 12px 18px 18px;
+      padding: 14px 28px 22px;
       overflow-x: auto;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 680px;
+      min-width: 720px;
       font-size: 0.9rem;
     }
 
     thead th {
       text-align: left;
-      font-size: 0.7rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       color: var(--muted);
-      padding: 10px 8px;
-      border-bottom: 2px solid var(--line);
+      padding: 12px 10px;
+      border-bottom: 1px solid var(--border-strong);
+      font-family: var(--font-mono);
     }
 
     tbody td {
-      padding: 8px;
-      border-bottom: 1px solid rgba(212, 196, 164, 0.4);
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--border);
       vertical-align: middle;
     }
-
     tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: var(--surface-2); }
 
     .lane-cell {
-      font-family: "Playfair Display", serif;
+      font-family: var(--font-display);
+      font-variation-settings: "opsz" 60;
       font-style: italic;
-      font-weight: 700;
-      color: var(--ink-soft);
+      font-weight: 600;
+      color: var(--muted);
       width: 50px;
       text-align: center;
+      font-size: 1.02rem;
     }
 
-    .silk-cell {
-      width: 32px;
-    }
+    .silk-cell { width: 36px; }
 
     .silk-swatch {
-      width: 18px;
-      height: 18px;
-      border-radius: 4px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
       background: var(--silk-colour, var(--ink));
-      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
-    }
-
-    tbody input[type="text"],
-    tbody input[type="number"] {
-      width: 100%;
-      font: inherit;
-      font-weight: 600;
-      padding: 7px 10px;
-      border: 1px solid var(--line);
-      border-radius: 3px;
-      background: #fff;
-      color: var(--ink);
+      box-shadow: 0 0 0 1.5px var(--surface), 0 0 0 2.5px var(--border-strong);
     }
 
     tbody input[type="number"] {
-      max-width: 100px;
+      max-width: 110px;
       text-align: center;
-      font-family: "Playfair Display", serif;
+      font-family: var(--font-mono);
+      font-weight: 600;
     }
 
     .quick-cell {
-      width: 130px;
+      width: 200px;
       text-align: right;
     }
 
     .quick-btn-group {
       display: inline-flex;
-      gap: 5px;
+      gap: 4px;
+      align-items: center;
     }
 
     .quick-btn-group .btn {
-      min-width: 42px;
+      min-width: 38px;
       padding: 6px 10px;
+      font-size: 0.8rem;
+      justify-content: center;
     }
 
     .footer-note {
-      padding: 0 18px 18px;
-      font-size: 0.78rem;
+      padding: 6px 28px 24px;
+      font-size: 0.82rem;
       color: var(--muted);
-      line-height: 1.5;
-      position: relative;
-      z-index: 2;
+      line-height: 1.6;
+      max-width: 900px;
     }
 
-    .ornament-divider {
-      text-align: center;
-      font-family: "Playfair Display", serif;
-      font-style: italic;
-      color: var(--gold-deep);
-      font-size: 1.1rem;
-      letter-spacing: 0.5em;
-      padding: 6px 0 0;
-      position: relative;
-      z-index: 2;
+    .footer-note code {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      background: var(--surface-2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--ink-2);
     }
 
-    /* hide admin panel when hideTable=true */
-    .admin-panel[hidden] { display: none; }
+    .footer-note strong { color: var(--ink); font-weight: 600; }
+    .footer-note em { font-style: normal; color: var(--ink); font-weight: 600; }
 
-    /* confetti container */
+    /* =================== CONFETTI =================== */
     .confetti {
       position: fixed;
       inset: 0;
@@ -812,37 +1088,34 @@
     .confetti-piece {
       position: absolute;
       width: 8px;
-      height: 14px;
+      height: 13px;
       top: -20px;
+      border-radius: 1px;
       animation: confettiFall linear forwards;
     }
 
     @keyframes confettiFall {
-      to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-      }
+      to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
     }
 
+    /* =================== RESPONSIVE =================== */
     @media (max-width: 700px) {
-      .masthead {
-        grid-template-columns: 1fr;
-        gap: 16px;
-      }
-      .status-stack { justify-items: start; }
+      .masthead { grid-template-columns: 1fr; gap: 18px; }
+      .status-stack { justify-items: start; align-content: start; }
       .settings-bar { grid-template-columns: 1fr; }
+      .card-head { flex-wrap: wrap; gap: 12px; }
     }
   </style>
 </head>
 <body>
   <div class="confetti" id="confetti" aria-hidden="true"></div>
   <main class="stage">
-    <!-- ====== HEADER ====== -->
+
+    <!-- ============ HEADER ============ -->
     <header class="masthead">
       <div class="title-block">
-        <p class="eyebrow">The Annual Stakes</p>
-        <h1 class="title" id="title">Team Review <span class="amp">&amp;</span> Horse Race</h1>
-        <p class="subtitle">Eleven runners. Eleven teams. Every review nudges your horse closer to the finish line. The leader wears the crown.</p>
+        <h1 class="title" id="title" aria-label="The Customer Review Grand National"></h1>
+        <p class="subtitle">Eleven runners. Eleven teams. Every review nudges your horse closer to the finish line — and the leader wears the crown.</p>
       </div>
       <div class="status-stack">
         <div class="live-badge is-demo" id="liveBadge">
@@ -853,17 +1126,19 @@
       </div>
     </header>
 
-    <!-- ====== MAIN GRID ====== -->
+    <!-- ============ MAIN GRID ============ -->
     <div class="main-grid">
 
-      <!-- ====== RACE TRACK ====== -->
+      <!-- RACE TRACK -->
       <section class="card">
         <div class="card-head">
           <h2>The Course</h2>
-          <span class="ornament">— furlong by furlong —</span>
+          <span class="head-meta">Live · furlong by furlong</span>
         </div>
         <div class="track-area">
           <div class="track" id="raceTrack" role="img" aria-label="Race track">
+            <div class="track-gate-col" aria-hidden="true"></div>
+            <div class="track-surface" aria-hidden="true"></div>
             <div class="start-rail" aria-hidden="true"></div>
             <div class="finish-line" aria-hidden="true"></div>
             <!-- lanes injected here -->
@@ -871,27 +1146,38 @@
         </div>
       </section>
 
-      <!-- ====== LEADERBOARD ====== -->
+      <!-- LEADERBOARD -->
       <aside class="card">
         <div class="card-head">
-          <h2>Form Guide</h2>
-          <span class="ornament">— current standings —</span>
+          <h2>Standings</h2>
+          <span class="head-meta">Form guide</span>
         </div>
         <div class="leaderboard" id="leaderboard"></div>
       </aside>
+
     </div>
 
-    <div class="ornament-divider" aria-hidden="true">❦ ❦ ❦</div>
-
-    <!-- ====== ADMIN / BACKEND PANEL ====== -->
+    <!-- ============ ADMIN PANEL ============ -->
     <section class="card admin-panel" id="adminPanel">
       <div class="card-head">
-        <h2>The Paddock <span class="ornament" style="margin-left:8px;">— runner setup &amp; scoring —</span></h2>
+        <h2>The Paddock</h2>
         <div class="controls-row">
-          <button type="button" class="btn" id="refreshBtn">↻ Refresh</button>
-          <button type="button" class="btn" id="sampleBtn">Load sample scores</button>
-          <button type="button" class="btn" id="resetBtn">Reset</button>
-          <button type="button" class="btn primary" id="exportBtn">Export CSV</button>
+          <button type="button" class="btn" id="refreshBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
+            Refresh
+          </button>
+          <button type="button" class="btn" id="sampleBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/></svg>
+            Sample data
+          </button>
+          <button type="button" class="btn" id="resetBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9c-2.52 0-4.93 1-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            Reset
+          </button>
+          <button type="button" class="btn primary" id="exportBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+            Export CSV
+          </button>
         </div>
       </div>
 
@@ -924,7 +1210,7 @@
 
       <div class="footer-note" id="footerNote">
         Local mode saves to this browser only. To connect this to a live data source, embed the file with
-        <code>?csvUrl=...</code> (Google Sheets) or <code>?spList=Horse%20Race%20Reviews</code> (SharePoint List) on the URL — see the README.
+        <code>?csvUrl=…</code> (Google Sheets) or <code>?spList=Horse%20Race%20Reviews</code> (SharePoint List) on the URL — see the README.
       </div>
     </section>
 
@@ -935,16 +1221,22 @@
     'use strict';
 
     // ============= CONFIG =============
-    const DEFAULT_TITLE = 'Team Review & Horse Race';
+    const DEFAULT_TITLE = 'The Customer Review Grand National';
     const TEAM_COUNT = 11;
     const STORAGE_KEY = 'horseRaceWidget.v2';
     const SILK_VARS = Array.from({length: 11}, (_, i) => `var(--silk-${i+1})`);
 
-    // raw colours for confetti / leaderboard swatches
     const SILK_HEX = [
-      '#1e3a8a', '#b91c1c', '#15803d', '#ca8a04', '#6b21a8',
-      '#0f766e', '#c2410c', '#be185d', '#4338ca', '#65a30d', '#475569'
+      '#4338ca', '#dc2626', '#047857', '#ea580c', '#7c3aed',
+      '#0891b2', '#ca8a04', '#db2777', '#1d4ed8', '#65a30d', '#475569'
     ];
+
+    // Classic horse-head silhouette (single filled path).
+    // Source: Delapouite via game-icons.net, CC BY 3.0 (https://creativecommons.org/licenses/by/3.0/).
+    const HORSE_SVG =
+      '<svg class="horse-svg" viewBox="0 0 512 512" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">' +
+        '<path d="M400 16c-21.335 9.73-58.244 17.34-73.086 48.232-22.36 1.948-72.753 10.673-122.22 40.25-58.098 34.74-116.017 97.417-131.776 213.702l-.48 3.537-2.774 2.25c-30.87 25.002-40.657 38.937-44.416 61.153-3.536 20.9-.72 51.46-.363 101.877H328.36c3.455-16.892 10.44-29.245 12.472-41.568 2.337-14.176.19-29.938-20.812-58.547-43.078-58.683-46.853-129.458-12.916-171.28-8.654-2.765-15.09-6.887-19.458-12.546-6.115-7.924-7.4-17.006-8.57-25.884l17.848-2.352c1.112 8.446 2.38 13.88 4.97 17.237 2.59 3.356 7.31 6.472 19.55 8.46l-.022.128.172-.17 5.998 9.424c19.957 31.358 42.84 51.292 73.332 54.44l6.51.672 1.367 6.4c2.74 12.828 8.626 19.095 15.116 22.238 6.49 3.143 14.225 2.944 20.47.205 9.316-4.086 14.518-11.35 16.7-22.712 2.122-11.05.546-25.834-5.137-42.106-33.538-38.248-44.475-87.277-63.903-128.772-6.055-9.947-12.448-18.518-20.385-24.856C376.808 55.126 386.456 34.852 400 16zM214.068 34.97C179.55 35.06 146.075 43.06 96 58.58c31.146 9.92 70.397 18.9 86.037 39.01 4.463-3.017 8.94-5.88 13.418-8.56 40.51-24.22 80.387-35.286 108.23-40.04-35.854-9.477-63.047-14.094-89.617-14.023zM157.16 96.712c-1.13-.01-2.265-.01-3.402.004-30.353.37-63.1 9.745-96.647 31.283 27.186 3.672 54.67 3.724 72.58 15.398 15.9-17.92 33.144-32.634 50.677-44.668a151.904 151.904 0 0 0-23.207-2.017zM368 128a13.214 13.215 0 0 1 13.213 13.215A13.214 13.215 0 0 1 368 154.432a13.214 13.215 0 0 1-13.213-13.217A13.214 13.215 0 0 1 368 128zm-238.906 16.068c-36.395 1.495-68.903 6.53-104.76 24.766 33.236 7.095 50.913 13.507 65.025 33.83 11.522-22.53 25.045-41.93 39.734-58.596zM74.518 201.46C53.53 201.65 36.614 213.14 16 224c27.854 0 46.067 3.862 58.71 12.055 4.33-11.652 9.16-22.615 14.41-32.924-5.12-1.19-9.963-1.71-14.602-1.67zm-.623 36.82c-17.933 5.845-35.452 7.15-54.23 22.284 17.62 4.638 34.79 9.596 41.398 22.034 3.496-15.77 7.814-30.523 12.832-44.32zm370.142 8.57a42.449 42.449 0 0 1 4.783.187l-1.64 17.926c-3.928-.36-5.513.416-5.57.465-.058.048-1.035.656-.635 5.886l-17.95 1.372c-.638-8.35 1.297-16.207 6.955-20.997 4.245-3.593 9.206-4.735 14.057-4.84zM52.215 290.723c-10.352.13-23.76 5.646-34.656 12.334 12.173 6.83 12.357 23.472 8.938 37.668 7.3-9.105 16.855-18.323 29.158-28.48 1.016-7.043 2.19-13.9 3.506-20.585-2.082-.67-4.42-.97-6.947-.937z"/>' +
+      '</svg>';
 
     const params = new URLSearchParams(window.location.search);
 
@@ -969,10 +1261,8 @@
     const scriptMode     = Boolean(config.scriptUrl);
     const sharePointMode = !csvMode && !scriptMode && Boolean(config.sharePointListName);
     const liveMode       = csvMode || sharePointMode || scriptMode;
-    // adminWritable: admin panel buttons can write back to the source of truth
     const adminWritable  = scriptMode || !liveMode;
 
-    // ============= ELEMENTS =============
     const els = {
       title:        document.getElementById('title'),
       titleInput:   document.getElementById('titleInput'),
@@ -994,16 +1284,13 @@
       applyBtn:     document.getElementById('applySettingsBtn')
     };
 
-    // ============= STATE =============
     let state = loadLocalState();
     let previousReviews = state.teams.map(t => t.reviews);
     let previousWinners = new Set();
 
     init();
 
-    // ============= INIT =============
     function init() {
-      // Apply optional teams= URL param
       if (config.teamsParam) {
         const names = config.teamsParam.split('|').map(s => s.trim()).filter(Boolean).slice(0, TEAM_COUNT);
         names.forEach((name, i) => { if (state.teams[i]) state.teams[i].name = name; });
@@ -1013,20 +1300,17 @@
       state.title         = config.title || state.title || DEFAULT_TITLE;
       state.targetReviews = config.targetReviews || state.targetReviews || 25;
 
-      els.title.textContent = state.title;
+      setTitleText(state.title);
       els.titleInput.value  = state.title;
       els.targetInput.value = state.targetReviews;
 
-      // wire buttons
       els.refreshBtn.addEventListener('click', refreshData);
       els.sampleBtn .addEventListener('click', loadSampleScores);
       els.resetBtn  .addEventListener('click', resetLocalTable);
       els.exportBtn .addEventListener('click', exportCsv);
       els.applyBtn  .addEventListener('click', applySettings);
 
-      if (config.hideTable) {
-        els.adminPanel.hidden = true;
-      }
+      if (config.hideTable) els.adminPanel.hidden = true;
 
       if (csvMode || scriptMode) {
         setCsvUi();
@@ -1042,14 +1326,24 @@
       }
     }
 
-    // ============= DATA LOADERS =============
+    function setTitleText(text) {
+      const t = String(text || DEFAULT_TITLE).trim();
+      // Split on "&" or " and " to get two halves
+      const idx = t.indexOf('&');
+      if (idx === -1) {
+        els.title.innerHTML = '<span class="t-plain">' + escapeHtml(t) + '</span>';
+        return;
+      }
+      const pre  = t.slice(0, idx).trim();
+      const post = t.slice(idx + 1).trim();
+      els.title.innerHTML =
+        '<span class="t-banner">' + escapeHtml(pre) + '</span>' +
+        '<span class="t-script"><span class="t-amp">&amp;</span> ' + escapeHtml(post) + '</span>';
+    }
 
     function defaultTeams() {
       return Array.from({length: TEAM_COUNT}, (_, i) => ({
-        lane:    i + 1,
-        name:    `Team ${i + 1}`,
-        reviews: 0,
-        id:      null
+        lane: i + 1, name: `Team ${i + 1}`, reviews: 0, id: null
       }));
     }
 
@@ -1092,7 +1386,6 @@
       renderAll();
     }
 
-    // Calls the Apps Script web app via GET. Returns the parsed JSON, or throws on error.
     async function callScript(actionParams) {
       if (!config.scriptUrl) throw new Error('No scriptUrl configured');
       const u = new URL(config.scriptUrl);
@@ -1102,11 +1395,7 @@
       if (config.scriptToken) u.searchParams.set('token', config.scriptToken);
       u.searchParams.set('_', Date.now());
 
-      const res = await fetch(u.toString(), {
-        method: 'GET',
-        redirect: 'follow',
-        cache: 'no-store'
-      });
+      const res = await fetch(u.toString(), { method: 'GET', redirect: 'follow', cache: 'no-store' });
       if (!res.ok) throw new Error('Script HTTP ' + res.status);
       const body = await res.json();
       if (!body.ok) throw new Error(body.error || 'Script returned ok=false');
@@ -1129,10 +1418,7 @@
     }
 
     function ingestScriptRows(rows) {
-      if (!Array.isArray(rows) || !rows.length) {
-        throw new Error('Script returned no team rows');
-      }
-      // Take RaceTarget from first row if no URL override
+      if (!Array.isArray(rows) || !rows.length) throw new Error('Script returned no team rows');
       if (!config.targetReviews) {
         const fromScript = Number(rows[0].target);
         if (Number.isFinite(fromScript) && fromScript > 0) state.targetReviews = fromScript;
@@ -1146,7 +1432,6 @@
     }
 
     async function loadFromCsv() {
-      // Cache-bust so the browser doesn't serve a stale CSV
       const sep = config.csvUrl.includes('?') ? '&' : '?';
       const url = config.csvUrl + sep + '_=' + Date.now();
 
@@ -1167,7 +1452,6 @@
 
         if (!records.length) throw new Error('No team rows found. Check the ' + config.titleField + ' column is populated.');
 
-        // Pick up RaceTarget from the first row if no URL override
         if (!config.targetReviews) {
           const fromCsv = Number(records[0][config.targetField]);
           if (Number.isFinite(fromCsv) && fromCsv > 0) state.targetReviews = fromCsv;
@@ -1190,14 +1474,9 @@
       }
     }
 
-    // Small, robust CSV parser. Handles quoted fields, escaped quotes, CRLF/LF.
     function parseCsv(text) {
       const rows = [];
-      let row = [];
-      let field = '';
-      let inQuotes = false;
-      let i = 0;
-      // Strip BOM
+      let row = [], field = '', inQuotes = false, i = 0;
       if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
       while (i < text.length) {
         const ch = text[i];
@@ -1215,7 +1494,6 @@
         field += ch; i++;
       }
       if (field !== '' || row.length) { row.push(field); rows.push(row); }
-      // Drop fully-empty rows
       return rows.filter(r => r.some(c => c !== ''));
     }
 
@@ -1240,7 +1518,6 @@
                      (data.d && data.d.results ? data.d.results : []);
         if (!rows.length) throw new Error('The list loaded, but no rows were returned. Add ' + TEAM_COUNT + ' rows.');
 
-        // pick up a target value from the list if rows have one and no URL param
         if (!config.targetReviews) {
           const fromList = Number(rows[0][config.targetField]);
           if (Number.isFinite(fromList) && fromList > 0) state.targetReviews = fromList;
@@ -1263,8 +1540,6 @@
       }
     }
 
-    // ============= RENDER =============
-
     function renderAll() {
       state.teams = normaliseTeams(state.teams);
       renderTrack();
@@ -1282,21 +1557,13 @@
     }
 
     function computePosition(reviews, leaderReviews, target) {
-      // Hybrid: relative to leader, but pegged to finish line once target is reached.
-      // - Leader sits at ~92% (just before the finish line) until they hit target.
-      // - When leader hits target, leader pins to 100% and others scale to target.
-      const TRACK_FRONT = 92;   // leader's parked position before crossing
+      const TRACK_FRONT = 92;
       if (leaderReviews <= 0) return 0;
-      if (leaderReviews >= target) {
-        // absolute mode against target; leader at 100, others proportional to target
-        return Math.min(100, (reviews / target) * 100);
-      }
-      // relative mode: leader at TRACK_FRONT, others scaled
+      if (leaderReviews >= target) return Math.min(100, (reviews / target) * 100);
       return (reviews / leaderReviews) * TRACK_FRONT;
     }
 
     function renderTrack() {
-      // remove old lanes
       Array.from(els.raceTrack.querySelectorAll('.lane')).forEach(n => n.remove());
 
       const ranking = rankedTeams();
@@ -1316,7 +1583,7 @@
         lane.style.setProperty('--silk', SILK_VARS[index % SILK_VARS.length]);
 
         const rankClass = rank === 1 ? 'leader' : (rank === 2 ? 'second' : (rank === 3 ? 'third' : ''));
-        const crownHtml = (rank === 1 && leaderReviews > 0) ? '<div class="crown" aria-hidden="true">👑</div>' : '';
+        const crownHtml = (rank === 1 && leaderReviews > 0) ? '<div class="crown" aria-hidden="true"></div>' : '';
 
         lane.innerHTML =
           '<div class="lane-no">' + team.lane + '</div>' +
@@ -1328,6 +1595,7 @@
               crownHtml +
               '<div class="horse-bubble">' +
                 '<div class="silk-band"></div>' +
+                HORSE_SVG +
                 '<span class="horse-emoji" aria-hidden="true">🐎</span>' +
               '</div>' +
               '<div class="rank-badge ' + rankClass + '">' + rank + '</div>' +
@@ -1341,7 +1609,6 @@
 
         els.raceTrack.appendChild(lane);
 
-        // detect bump (score increased) and animate score pill + maybe confetti
         const prev = previousReviews[index];
         if (prev != null && team.reviews > prev) {
           const pill = lane.querySelector('.score-pill');
@@ -1349,11 +1616,8 @@
           window.setTimeout(() => pill.classList.remove('bump'), 400);
         }
 
-        // confetti when newly crossing target
         const wasWinner = previousWinners.has(index);
-        if (hasWon && !wasWinner) {
-          fireConfetti(SILK_HEX[index % SILK_HEX.length]);
-        }
+        if (hasWon && !wasWinner) fireConfetti(SILK_HEX[index % SILK_HEX.length]);
       });
 
       previousReviews = state.teams.map(t => t.reviews);
@@ -1369,8 +1633,10 @@
         const row = document.createElement('div');
         row.className = 'leader-row' + (i === 0 && team.reviews > 0 ? ' is-leader' : '');
         row.style.setProperty('--silk-colour', SILK_HEX[team.originalIndex % SILK_HEX.length]);
+        const n = i + 1;
+        const suf = ordinalSuffix(n);
         row.innerHTML =
-          '<div class="position">' + ordinal(i + 1) + '</div>' +
+          '<div class="position">' + n + '<span class="position-suf">' + suf + '</span></div>' +
           '<div class="leader-name" title="' + escapeHtml(team.name) + '">' + escapeHtml(team.name) + '</div>' +
           '<div class="leader-score">' + team.reviews + '</div>';
         els.leaderboard.appendChild(row);
@@ -1391,7 +1657,9 @@
             '<button type="button" class="btn" data-index="' + index + '" data-action="minus" ' + disabled + '>−1</button>' +
             '<button type="button" class="btn primary" data-index="' + index + '" data-action="plus" ' + disabled + '>+1</button>' +
             '<button type="button" class="btn gold" data-index="' + index + '" data-action="plus5" ' + disabled + '>+5</button>' +
-            '<button type="button" class="btn" data-index="' + index + '" data-action="reset" ' + disabled + ' title="Reset to zero">↺</button>' +
+            '<button type="button" class="btn" data-index="' + index + '" data-action="reset" ' + disabled + ' title="Reset to zero" aria-label="Reset">' +
+              '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;"><path d="M3 12a9 9 0 1 0 9-9c-2.52 0-4.93 1-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>' +
+            '</button>' +
           '</span></td>';
         els.adminRows.appendChild(tr);
       });
@@ -1400,8 +1668,6 @@
       els.adminRows.querySelectorAll('button[data-action]').forEach(btn => btn.addEventListener('click', onQuickUpdate));
     }
 
-    // ============= EVENTS =============
-
     async function onTableInput(e) {
       const inp = e.currentTarget;
       const i = Number(inp.dataset.index);
@@ -1409,7 +1675,7 @@
       if (!state.teams[i]) return;
 
       if (scriptMode) {
-        if (field !== 'reviews') return; // name edits not supported in script mode
+        if (field !== 'reviews') return;
         const value = Math.max(0, Math.floor(Number(inp.value || 0)));
         if (value === state.teams[i].reviews) return;
         const lane = state.teams[i].lane;
@@ -1443,14 +1709,10 @@
 
       if (scriptMode) {
         if (!scriptAction) return;
-        await dispatchScriptAction(
-          Object.assign({lane: state.teams[i].lane}, scriptAction),
-          i, btn
-        );
+        await dispatchScriptAction(Object.assign({lane: state.teams[i].lane}, scriptAction), i, btn);
         return;
       }
 
-      // Local / demo mode: mutate state directly
       const current = state.teams[i].reviews;
       if (action === 'plus')       state.teams[i].reviews = current + 1;
       else if (action === 'minus') state.teams[i].reviews = Math.max(0, current - 1);
@@ -1465,14 +1727,10 @@
       if (sourceBtn) { sourceBtn.disabled = true; sourceBtn.style.opacity = '0.6'; }
       try {
         const body = await callScript(actionParams);
-        if (body.data) {
-          ingestScriptRows(body.data);
-          renderAll();
-        }
+        if (body.data) { ingestScriptRows(body.data); renderAll(); }
         clearNotice();
       } catch (err) {
         setNotice('Update failed: ' + err.message + '. The sheet may not have changed.', 'error');
-        // Pull fresh state so the UI doesn't drift
         await loadFromScript();
       } finally {
         if (sourceBtn) { sourceBtn.disabled = previous; sourceBtn.style.opacity = ''; }
@@ -1482,7 +1740,7 @@
     function applySettings() {
       state.title         = els.titleInput.value.trim() || DEFAULT_TITLE;
       state.targetReviews = Math.max(1, Math.floor(Number(els.targetInput.value || 25)));
-      els.title.textContent = state.title;
+      setTitleText(state.title);
       saveLocalState();
       renderAll();
     }
@@ -1499,7 +1757,7 @@
       if (liveMode) return;
       if (!window.confirm('Reset all reviews to zero and restore default team names?')) return;
       state = {title: DEFAULT_TITLE, targetReviews: 25, teams: defaultTeams()};
-      els.title.textContent = state.title;
+      setTitleText(state.title);
       els.titleInput.value  = state.title;
       els.targetInput.value = state.targetReviews;
       saveLocalState();
@@ -1521,11 +1779,9 @@
       URL.revokeObjectURL(url);
     }
 
-    // ============= UI MODES =============
-
     function setSharePointUi() {
       els.liveBadge.classList.remove('is-demo');
-      els.liveBadgeText.textContent = 'Live: ' + config.sharePointListName;
+      els.liveBadgeText.textContent = 'Live · ' + config.sharePointListName;
       els.sampleBtn.disabled = true;
       els.resetBtn.disabled  = true;
       els.exportBtn.disabled = true;
@@ -1537,13 +1793,13 @@
 
     function setCsvUi() {
       els.liveBadge.classList.remove('is-demo');
-      els.liveBadgeText.textContent = 'Live: Google Sheets';
+      els.liveBadgeText.textContent = 'Live · Google Sheets';
       els.sampleBtn.disabled = true;
       els.resetBtn.disabled  = true;
       els.exportBtn.disabled = true;
       if (scriptMode) {
         els.footerNote.innerHTML =
-          'Live Google Sheets mode (with scoring buttons). Use the +1 / +5 / −1 / ↺ buttons above to score. ' +
+          'Live Google Sheets mode (with scoring buttons). Use the +1 / +5 / −1 / reset buttons above to score. ' +
           'Every click writes to your Google Sheet via Apps Script. ' +
           'The widget also auto-refreshes every ' + config.refreshSeconds + ' seconds.';
       } else {
@@ -1564,16 +1820,13 @@
       els.notice.textContent = msg;
       els.notice.className = 'notice ' + (kind || 'info');
     }
-
     function clearNotice() {
       els.notice.hidden = true;
       els.notice.textContent = '';
     }
 
-    // ============= CONFETTI =============
-
     function fireConfetti(primaryColour) {
-      const palette = [primaryColour, '#c8a85a', '#1a4d3a', '#ffffff', '#6b1f1f'];
+      const palette = [primaryColour, '#d4a82a', '#f1ce5a', '#ffffff', '#2a8a5a'];
       const count = 60;
       for (let i = 0; i < count; i++) {
         const piece = document.createElement('div');
@@ -1588,22 +1841,21 @@
       }
     }
 
-    // ============= HELPERS =============
-
     function ordinal(n) {
       const s = ['th', 'st', 'nd', 'rd'];
       const v = n % 100;
       return n + (s[(v - 20) % 10] || s[v] || s[0]);
     }
-
+    function ordinalSuffix(n) {
+      const s = ['th', 'st', 'nd', 'rd'];
+      const v = n % 100;
+      return s[(v - 20) % 10] || s[v] || s[0];
+    }
     function positiveNumber(value, fallback) {
       const n = Number(value);
       return Number.isFinite(n) && n > 0 ? n : fallback;
     }
-
-    function nowString() {
-      return new Date().toLocaleString();
-    }
+    function nowString() { return new Date().toLocaleString(); }
 
     function deriveSharePointSiteUrl() {
       const origin = window.location.origin;
